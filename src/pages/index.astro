@@ -7,10 +7,10 @@ import Pagination from "@components/Pagination.astro";
 import { getConstants } from "@consts";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-const currentLocale = "en";
+const currentLocale = "zh";
 const constants = getConstants(currentLocale);
 
-const allPosts = await getCollection("posts", ({ id }) => id.startsWith(`us/`));
+const allPosts = await getCollection("posts", ({ id }) => id.startsWith(`cn/`));
 allPosts.sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
