@@ -2,7 +2,7 @@
 title: 关于本站
 description: 关于本站的介绍
 category:
-  - 技术前沿速递
+  - 个人生活杂谈
 tags:
   - AI
 pubDate: 2024-09-12
