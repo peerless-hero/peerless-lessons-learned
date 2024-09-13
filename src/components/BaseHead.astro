@@ -63,6 +63,15 @@ const enUrl = getAlternateLocaleUrl("en");
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+<script is:inline>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
 
 <script>
   import "preline/dist/preline.js";
