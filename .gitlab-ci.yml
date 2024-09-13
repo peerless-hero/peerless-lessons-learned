@@ -18,15 +18,13 @@ image: node:20
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - node_modules/
-
-before_script:
-  - yarn install --frozen-lockfile
+    - node_modules/ 
 
 build:
   stage: build
   script:
+    - yarn install --frozen-lockfile 
     - yarn build
   artifacts:
     paths:
-      - dist/
+      - dist/**/*
