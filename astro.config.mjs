@@ -7,13 +7,13 @@ import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  site: "https://verse-i18n.vercel.app/",
+  site: "https://www.peerless.vip/",
   trailingSlash: "always",
   prefetch: {
     prefetchAll: true,
   },
   i18n: {
-    defaultLocale: "en",
+    defaultLocale: "zh",
     locales: ["zh", "en"],
     routing: {
       prefixDefaultLocale: true,
