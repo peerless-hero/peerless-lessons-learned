@@ -4,7 +4,7 @@ description: 关于本站的介绍
 category:
   - 个人生活杂谈
 tags:
-  - AI
+  - about
 pubDate: 2024-09-12
 cover: https://images.unsplash.com/photo-1516557070061-c3d1653fa646??w=1960&h=1102&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHwwfDB8fHwy
 coverAlt: 关于本站
