@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import FooterLinks from "@components/FooterLinks.astro";
 import FooterLanguageSwitcher from "@components/LanguageSwitcher.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import beian from "@assets/beian.png";
 
 let navData;
 
@@ -108,7 +109,15 @@ const brandName = currentLocale === "zh" ? "无双的经验之谈" : "PeerlessLe
           aria-label="Astroverse">{brandName} &copy; {today.getFullYear()}</a
         >
         <br>
-        <a class="flex-none text-sm text-neutral-600 dark:text-neutral-400" href="http://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">新ICP备2024013818号</a>
+        <a class="flex-none text-sm text-neutral-600 dark:text-neutral-400" href="http://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">
+         新ICP备2024013818号
+        </a>
+        <br>
+        <img class="inline size-4" src={ beian.src } alt="备案图标">
+        <a class="flex-none text-sm text-neutral-600 dark:text-neutral-400" href="https://beian.mps.gov.cn/#/query/webSearch?code=44030002004699" rel="noopener noreferrer" target="_blank">
+          粤公网安备44030002004699
+        </a>
+        <br>
       </div> 
       <div class="flex items-center justify-between gap-x-3">
         <div class="ms-4 space-x-4 text-sm">
