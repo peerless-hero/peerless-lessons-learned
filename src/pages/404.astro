@@ -1,0 +1,14 @@
+---
+import NotFoundLayoutCN from "./zh/404.astro";
+import NotFoundLayoutEN from "./en/404.astro";
+const isEN = Astro.currentLocale?.includes("en");
+---
+{isEN ? (
+<>
+  <NotFoundLayoutEN />
+</>
+) : (
+<>
+  <NotFoundLayoutCN />
+</>
+)}
