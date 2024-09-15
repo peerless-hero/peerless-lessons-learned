@@ -5,6 +5,7 @@
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@en/*": ["src/components/en/*"],
       "@layouts/*": ["src/layouts/*"],
