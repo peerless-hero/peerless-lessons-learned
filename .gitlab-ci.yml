@@ -23,8 +23,8 @@ cache:
 build:
   stage: build
   script:
-    - yarn install --frozen-lockfile 
+    - yarn --prefer-offline --frozen-lockfile --non-interactive
     - yarn build
   artifacts:
     paths:
-      - dist/**/*
+      - dist/*
