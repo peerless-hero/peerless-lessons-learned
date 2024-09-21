@@ -8,7 +8,9 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "format": "prettier -w .",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
@@ -26,14 +28,16 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^3.7.1",
     "@iconify-json/flagpack": "^1.1.14",
     "@iconify-json/flat-color-icons": "^1.1.10",
     "@iconify-json/tabler": "^1.1.115",
     "@tailwindcss/typography": "^0.5.13",
+    "eslint": "^9.11.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "typescript": "^5.4.5"
+    "typescript": "5.5.4"
   },
   "resolutions": {
     "cheerio": "1.0.0-rc.12"
