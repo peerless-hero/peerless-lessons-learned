@@ -1,9 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "strictNullChecks": true,
-    "module": "esnext",
     "baseUrl": ".",
+    "module": "esnext",
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
@@ -11,6 +10,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
       "@consts": ["src/consts.ts"]
-    }
+    },
+    "strictNullChecks": true
   }
 }

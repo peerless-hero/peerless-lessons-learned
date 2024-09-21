@@ -4,21 +4,21 @@
  * @LastEditors: peerless_hero peerless_hero@outlook.com
  * @LastEditTime: 2024-09-13 01:45:36
  * @FilePath: \peerless.vip\src\utils\zh\footernav.ts
- * @Description: 
- * 
+ * @Description:
+ *
  */
 export const one = [
-  { text: "Docker", href: "/tags/Docker/1/" },
-];
+  { text: 'Docker', href: '/tags/Docker/1/' },
+]
 
 export const two = [
-  { text: "AI", href: "/tags/AI/1/" },
-];
+  { text: 'AI', href: '/tags/AI/1/' },
+]
 
 export const three = [
-  { text: "备案", href: "/tags/ICP/1/" },
-];
+  { text: '备案', href: '/tags/ICP/1/' },
+]
 
 export const more = [
-  { text: "关于", href: "/about/" },
-];
+  { text: '关于', href: '/about/' },
+]

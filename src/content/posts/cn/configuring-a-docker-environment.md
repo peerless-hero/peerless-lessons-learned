@@ -23,7 +23,8 @@ author: peerless_hero
 ### 二、卸载旧版本（如已安装）
 
 如果系统中已安装旧版本的Docker，建议先卸载，以避免版本冲突。
-- 执行`sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine`命令卸载旧版本。
+
+执行`sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine`命令卸载旧版本。
 
 ### 三、设置Docker仓库
 
@@ -61,16 +62,18 @@ author: peerless_hero
    - 执行`sudo mkdir -p /etc/docker`命令创建Docker配置文件目录。
 
 2. **编辑Docker配置文件**：
-   - 执行`sudo tee /etc/docker/daemon.json <<-'EOF'`，然后粘贴以下内容（以阿里云镜像源为例）：
-     ```json
+   执行`sudo tee /etc/docker/daemon.json <<-'EOF'`，然后粘贴以下内容（以阿里云镜像源为例）：
+
+```sh
      {
        "registry-mirrors": ["https://your-mirror-accel.mirror.aliyuncs.com"]
      }
      EOF
-     ```
-   - 注意替换`https://your-mirror-accel.mirror.aliyuncs.com`为你的实际镜像源地址。
+```
 
-3. **重新加载Docker配置并重启Docker服务**：
+注意替换`https://your-mirror-accel.mirror.aliyuncs.com`为你的实际镜像源地址。
+
+1. **重新加载Docker配置并重启Docker服务**：
    - 执行`sudo systemctl daemon-reload`命令重新加载Docker配置。
    - 执行`sudo systemctl restart docker`命令重启Docker服务。
 

@@ -23,7 +23,8 @@ author: peerless_hero
 ### Step 2: Uninstall Older Versions (if installed)
 
 If you have older versions of Docker installed, it's recommended to uninstall them first to avoid version conflicts.
-- Execute `sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine` to uninstall older versions.
+
+Execute `sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine` to uninstall older versions.
 
 ### Step 3: Set Up the Docker Repository
 
@@ -61,16 +62,18 @@ To improve the speed of pulling Docker images, you can configure a domestic Dock
    - Execute `sudo mkdir -p /etc/docker` to create the Docker configuration directory.
 
 2. **Edit the Docker Configuration File**:
-   - Execute `sudo tee /etc/docker/daemon.json <<-'EOF'` and paste the following content (using Alibaba Cloud's mirror as an example):
-     ```json
-     {
-       "registry-mirrors": ["https://your-mirror-accel.mirror.aliyuncs.com"]
-     }
-     EOF
-     ```
-   - Replace `https://your-mirror-accel.mirror.aliyuncs.com` with your actual mirror address.
+Execute `sudo tee /etc/docker/daemon.json <<-'EOF'` and paste the following content (using Alibaba Cloud's mirror as an example):
 
-3. **Reload Docker Configuration and Restart the Service**:
+```sh
+{
+  "registry-mirrors": ["https://your-mirror-accel.mirror.aliyuncs.com"]
+}
+EOF
+```
+
+Replace `https://your-mirror-accel.mirror.aliyuncs.com` with your actual mirror address.
+
+1. **Reload Docker Configuration and Restart the Service**:
    - Execute `sudo systemctl daemon-reload` to reload the Docker configuration.
    - Execute `sudo systemctl restart docker` to restart the Docker service.
 

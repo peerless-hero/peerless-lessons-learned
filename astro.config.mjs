@@ -1,20 +1,20 @@
-import { defineConfig } from "astro/config";
-import { remarkModifiedTime } from "./src/utils/remark-modified-time.mjs";
-import sitemap from "@astrojs/sitemap";
-import pagefind from "astro-pagefind";
-import icon from "astro-icon";
-import tailwind from "@astrojs/tailwind";
-import mdx from "@astrojs/mdx";
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
+import icon from 'astro-icon'
+import pagefind from 'astro-pagefind'
+import { remarkModifiedTime } from './src/utils/remark-modified-time.mjs'
 
 export default defineConfig({
-  site: "https://www.peerless.vip/",
-  trailingSlash: "always",
+  site: 'https://www.peerless.vip/',
+  trailingSlash: 'always',
   prefetch: {
     prefetchAll: true,
   },
   i18n: {
-    defaultLocale: "zh",
-    locales: ["zh", "en"],
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
@@ -23,8 +23,8 @@ export default defineConfig({
   image: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**.unsplash.com",
+        protocol: 'https',
+        hostname: '**.unsplash.com',
       },
     ],
   },
@@ -38,10 +38,10 @@ export default defineConfig({
     tailwind(),
     icon({
       include: {
-        tabler: ["*"],
-        flagpack: ["*"],
-        "flat-color-icons": ["*"],
+        'tabler': ['*'],
+        'flagpack': ['*'],
+        'flat-color-icons': ['*'],
       },
     }),
   ],
-});
+})
