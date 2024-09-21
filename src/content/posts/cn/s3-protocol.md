@@ -6,7 +6,7 @@ category:
 tags:
   - s3
 pubDate: 2024-09-21
-cover: ../assets/s3-protocol.jpeg
+cover: https://images.unsplash.com/photo-1516557070061-c3d1653fa646??w=1960&h=1102&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHwwfDB8fHwy
 coverAlt: S3协议
 author: peerless_hero
 ---
