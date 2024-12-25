@@ -1,0 +1,16 @@
+{
+  "installCommand": "yarn install",
+  "buildCommand": "yarn build",
+  "nodeVersion": "22.11.0",
+  "headers": [
+    {
+      "source": "/_astro/*",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public,max-age=31536000,immutable"
+        }
+      ]
+    }
+  ]
+}
