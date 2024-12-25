@@ -13,7 +13,9 @@
 
 ## 网站地址
 
-国内：[https://peerless.vip](https://peerless.vip)
+[https://peerless.vip](https://peerless.vip)
+
+Deploy on Tencent Cloud within China and on Cloudflare pages overseas.
 
 ## 网站内容
 
