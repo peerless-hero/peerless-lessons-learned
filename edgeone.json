@@ -26,6 +26,10 @@
         {
           "key": "x-content-type-options",
           "value": "nosniff"
+        },
+        {
+          "key": "access-control-allow-origin",
+          "value": "*"
         }
       ]
     }
