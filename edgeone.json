@@ -32,6 +32,24 @@
           "value": "*"
         }
       ]
+    },
+    {
+      "source": "*.js",
+      "headers": [
+        {
+          "key": "content-type",
+          "value": "application/javascript;charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "*.css",
+      "headers": [
+        {
+          "key": "content-type",
+          "value": "text/css;charset=utf-8"
+        }
+      ]
     }
   ]
 }
