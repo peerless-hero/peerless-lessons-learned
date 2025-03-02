@@ -23,6 +23,11 @@ const today = new Date()
 function safeGetRelativeLocaleUrl(path: string) {
   return getRelativeLocaleUrl(currentLocale, path)
 }
+function getRSS() {
+  const rssUrl = getRelativeLocaleUrl(currentLocale, 'rss.xml')
+  // 删除最后一个斜杠
+  return rssUrl.substring(0, rssUrl.length - 1)
+}
 
 const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLessonsLearned';
 ---
@@ -126,7 +131,7 @@ const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLe
         <div class="ms-4 space-x-4 text-sm">
           <a
             class="inline-block text-neutral-500 hover:text-neutral-800 dark:text-neutral-500 dark:hover:text-neutral-200"
-            href={safeGetRelativeLocaleUrl('rss.xml')}
+            href={getRSS()}
             aria-label="RSS"
           >
             <Icon name="tabler:rss" class="mt-1 h-auto w-5" />
