@@ -35,48 +35,40 @@ const zhUrl = getAlternateLocaleUrl('zh')
 const enUrl = getAlternateLocaleUrl('en');
 ---
 
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-<meta name="generator" content={Astro.generator} />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<meta name="generator" content={Astro.generator}/>
 
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonicalURL}/>
 
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="sitemap" href="/sitemap-index.xml"/>
 
-<link rel="alternate" hreflang="zh" href={zhUrl} />
-<link rel="alternate" hreflang="en" href={enUrl} />
-<link rel="alternate" hreflang="x-default" href={zhUrl} />
+<link rel="alternate" hreflang="zh" href={zhUrl}/>
+<link rel="alternate" hreflang="en" href={enUrl}/>
+<link rel="alternate" hreflang="x-default" href={zhUrl}/>
 
 <title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-<meta name="baidu-site-verification" content="codeva-PfQse1ly3W" />
+<meta name="title" content={title}/>
+<meta name="description" content={description}/>
+<meta name="baidu-site-verification" content="codeva-PfQse1ly3W"/>
 
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:type" content="website"/>
+<meta property="og:url" content={Astro.url}/>
+<meta property="og:title" content={title}/>
+<meta property="og:description" content={description}/>
+<meta property="og:image" content={new URL(image, Astro.url)}/>
 
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
-<script is:inline>
-var _hmt = _hmt || [];
-(function () {
-  const hm = document.createElement('script')
-  hm.src = 'https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2'
-  const s = document.getElementsByTagName('script')[0]
-  s.parentNode.insertBefore(hm, s)
-})()
-</script>
-
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:url" content={Astro.url}/>
+<meta property="twitter:title" content={title}/>
+<meta property="twitter:description" content={description}/>
+<meta property="twitter:image" content={new URL(image, Astro.url)}/>
 <script>
   import 'preline/dist/preline.js'
 </script>
+
+<script is:inline src="https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2" defer></script>
