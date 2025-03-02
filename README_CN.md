@@ -15,7 +15,7 @@
 
 [https://peerless.vip](https://peerless.vip)
 
-Deploy on Tencent Cloud within China and on Cloudflare pages overseas.
+国内部署在腾讯云，海外部署在 Cloudflare Pages。
 
 ## 网站内容
 
