@@ -11,7 +11,7 @@ coverAlt: 这是二十多年前的
 author: peerless_hero
 ---
 
-My project is open source and hosted on [Gitlab](https://gitlab.com/peerless_hero/peerless-lessons-learned) Source code cloned from [stroverse-i18n](https://github.com/isooosi/astroverse-i18n).
+My project is open source and hosted on [Github](https://github.com/peerless-hero/peerless-lessons-learned) Source code cloned from [stroverse-i18n](https://github.com/isooosi/astroverse-i18n).
 
 ## Why is the website project open source?
 
@@ -24,7 +24,7 @@ Within China: [https://peerless.vip](https://peerless.vip)
 
 ## Website Content
 
-Part of the content of this project comes from the Internet. If it infringes your rights, please submit the issue in the code warehouse to contact me for deletion.
+Part of the content of this project comes from the Internet. If it infringes your rights, please submit the [issues](https://github.com/peerless-hero/peerless-lessons-learned/issues) in the code warehouse to contact me for deletion.
 
 Creating is not easy. If you repost original content from this website, please indicate the source and keep the original author information.
 

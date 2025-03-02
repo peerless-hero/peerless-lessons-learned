@@ -11,7 +11,7 @@ coverAlt: 关于本站
 author: peerless_hero
 ---
 
-本站项目开源，托管于[Gitlab](https://gitlab.com/peerless_hero/peerless-lessons-learned)，源码克隆自 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)。x
+本站项目开源，托管于[Github](https://github.com/peerless-hero/peerless-lessons-learned)，源码克隆自 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)。x
 
 ## 网站项目为何开源？
 
@@ -24,7 +24,7 @@ author: peerless_hero
 
 ## 网站内容
 
-本项目部分内容来源于互联网，如果侵犯了您的权益，请在代码仓库提交 issue 联系本人删除。
+本项目部分内容来源于互联网，如果侵犯了您的权益，请在代码仓库提交 [issues](https://github.com/peerless-hero/peerless-lessons-learned/issues) 联系本人删除。
 
 创作不易，如果转载本站原创内容，请注明出处，并保留原作者信息。
 
