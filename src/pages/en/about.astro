@@ -1,42 +1,42 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import OptimizedCover from "@components/OptimizedPicture.astro";
-import { Icon } from "astro-icon/components";
-import LatestPosts from "@components/LatestPosts.astro";
-import { getConstants } from "@consts";
+import LatestPosts from '@components/LatestPosts.astro'
+import OptimizedCover from '@components/OptimizedPicture.astro'
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { Icon } from 'astro-icon/components'
 
-const currentLocale = "en";
-const constants = getConstants(currentLocale);
+const currentLocale = 'en'
+const constants = getConstants(currentLocale)
 
-const title = `About ${constants.SITE_TITLE}`;
-const description = constants.SITE_DESCRIPTION;
+const title = `About ${constants.SITE_TITLE}`
+const description = constants.SITE_DESCRIPTION
 const tabs = [
   {
-    icon: "tabler:yoga",
-    title: "Heavenly Stems",
+    icon: 'tabler:yoga',
+    title: 'Heavenly Stems',
     content:
-      "Heavenly Stems represent the timing of the heavens, symbolizing the passage of time and the arrangement of destiny. Each Heavenly Stem is a unique energy symbol, guiding us to find our direction in the flow of time.",
+      'Heavenly Stems represent the timing of the heavens, symbolizing the passage of time and the arrangement of destiny. Each Heavenly Stem is a unique energy symbol, guiding us to find our direction in the flow of time.',
     image:
-      "https://images.unsplash.com/photo-1516827003699-2880f453d93b?q=80&w=1592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt: "About the Astral World - Heavenly Stems",
+      'https://images.unsplash.com/photo-1516827003699-2880f453d93b?q=80&w=1592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageAlt: 'About the Astral World - Heavenly Stems',
   },
   {
-    icon: "tabler:swimming",
-    title: "Earthly Branches",
+    icon: 'tabler:swimming',
+    title: 'Earthly Branches',
     content:
-      "Earthly Branches symbolize the power of the earth and the operation of human affairs. The combination of Earthly Branches forms the framework of time and space, allowing us to find stability amidst change.",
+      'Earthly Branches symbolize the power of the earth and the operation of human affairs. The combination of Earthly Branches forms the framework of time and space, allowing us to find stability amidst change.',
     image:
-      "https://images.unsplash.com/photo-1560233026-ad254fa8da38?q=80&w=2759&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt: "About the Astral World - Earthly Branches",
+      'https://images.unsplash.com/photo-1560233026-ad254fa8da38?q=80&w=2759&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageAlt: 'About the Astral World - Earthly Branches',
   },
   {
-    icon: "tabler:run",
-    title: "Yin and Yang",
+    icon: 'tabler:run',
+    title: 'Yin and Yang',
     content:
-      "Yin and Yang are the fundamental laws of the universe, representing opposition and unity. The balance of Yin and Yang allows all things to thrive, teaching us to maintain harmony and balance in life.",
+      'Yin and Yang are the fundamental laws of the universe, representing opposition and unity. The balance of Yin and Yang allows all things to thrive, teaching us to maintain harmony and balance in life.',
     image:
-      "https://images.unsplash.com/photo-1520533881-8a3699d7e58b?q=80&w=2572&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageAlt: "About the Astral World - Yin and Yang",
+      'https://images.unsplash.com/photo-1520533881-8a3699d7e58b?q=80&w=2572&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    imageAlt: 'About the Astral World - Yin and Yang',
   },
 ];
 ---
@@ -64,7 +64,7 @@ const tabs = [
               tabs.map((tab, index) => (
                 <button
                   type="button"
-                  class={`rounded-xl p-4 text-start hover:bg-neutral-200 focus:bg-neutral-200 focus:outline-none hs-tab-active:bg-white hs-tab-active:shadow-md hs-tab-active:hover:border-transparent dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:hs-tab-active:bg-neutral-700 md:p-5 ${index === 0 ? "active" : ""}`}
+                  class={`rounded-xl p-4 text-start hover:bg-neutral-200 focus:bg-neutral-200 focus:outline-none hs-tab-active:bg-white hs-tab-active:shadow-md hs-tab-active:hover:border-transparent dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:hs-tab-active:bg-neutral-700 md:p-5 ${index === 0 ? 'active' : ''}`}
                   id={`tabs-with-card-item-${index + 1}`}
                   data-hs-tab={`#tabs-with-card-${index + 1}`}
                   aria-controls={`tabs-with-card-${index + 1}`}
@@ -97,7 +97,7 @@ const tabs = [
                 tabs.map((tab, index) => (
                   <div
                     id={`tabs-with-card-${index + 1}`}
-                    class={index === 0 ? "" : "hidden"}
+                    class={index === 0 ? '' : 'hidden'}
                     role="tabpanel"
                     aria-labelledby={`tabs-with-card-item-${index + 1}`}
                   >

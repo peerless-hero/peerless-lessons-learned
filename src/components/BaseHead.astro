@@ -1,35 +1,38 @@
 ---
 interface Props {
-  title: string;
-  description: string;
-  image?: string;
+  title: string
+  description: string
+  image?: string
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { title, description, image = "/blog-placeholder-1.avif" } = Astro.props;
+const { title, description, image = '/blog-placeholder-1.avif' } = Astro.props
 
-const currentLocale = Astro.currentLocale ?? "zh";
+const currentLocale = Astro.currentLocale ?? 'zh'
 
 function getAlternateLocaleUrl(targetLocale: string) {
-  const pathParts = Astro.url.pathname.split("/").filter(Boolean);
+  const pathParts = Astro.url.pathname.split('/').filter(Boolean)
   if (pathParts[0] === currentLocale) {
-    pathParts[0] = targetLocale;
-  } else if (pathParts[0] === "posts" && pathParts.length >= 3) {
-    pathParts[1] = targetLocale;
-    if (targetLocale === "zh") {
-      pathParts[2] = "cn";
-    } else if (targetLocale === "en") {
-      pathParts[2] = "us";
-    }
-  } else {
-    pathParts.unshift(targetLocale);
+    pathParts[0] = targetLocale
   }
-  return new URL("/" + pathParts.join("/"), Astro.site).toString();
+ else if (pathParts[0] === 'posts' && pathParts.length >= 3) {
+    pathParts[1] = targetLocale
+    if (targetLocale === 'zh') {
+      pathParts[2] = 'cn'
+    }
+ else if (targetLocale === 'en') {
+      pathParts[2] = 'us'
+    }
+  }
+ else {
+    pathParts.unshift(targetLocale)
+  }
+  return new URL(`/${pathParts.join('/')}`, Astro.site).toString()
 }
 
-const zhUrl = getAlternateLocaleUrl("zh");
-const enUrl = getAlternateLocaleUrl("en");
+const zhUrl = getAlternateLocaleUrl('zh')
+const enUrl = getAlternateLocaleUrl('en');
 ---
 
 <meta charset="utf-8" />
@@ -65,15 +68,15 @@ const enUrl = getAlternateLocaleUrl("en");
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 <script is:inline>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
+var _hmt = _hmt || [];
+(function () {
+  const hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2'
+  const s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 </script>
 
 <script>
-  import "preline/dist/preline.js";
+  import 'preline/dist/preline.js'
 </script>

@@ -1,16 +1,16 @@
 ---
-import { Picture } from "astro:assets";
+import { Picture } from 'astro:assets'
 
-const imagesRecord = import.meta.glob<ImageMetadata>("src/assets/*",{ eager: true,import: "default"});
-  
+const imagesRecord = import.meta.glob<ImageMetadata>('src/assets/*', { eager: true, import: 'default' })
+
 interface Props {
-  src: string;
-  alt: string;
-  widths?: number[];
-  sizes?: string;
-  formats?: string[];
-  fallbackFormat?: string;
-  class?: string;
+  src: string
+  alt: string
+  widths?: number[]
+  sizes?: string
+  formats?: string[]
+  fallbackFormat?: string
+  class?: string
 }
 
 const {
@@ -21,18 +21,18 @@ const {
            (max-width: 720px) 700px, 
            (max-width: 1600px) 980px, 
            1960px`,
-  formats = ["avif"],
-  fallbackFormat = "avif",
-  class: className = "mx-auto w-full max-w-full rounded-lg",
-} = Astro.props; 
+  formats = ['avif'],
+  fallbackFormat = 'avif',
+  class: className = 'mx-auto w-full max-w-full rounded-lg',
+} = Astro.props
 
-const imageSrc:any = (()=>{
+const imageSrc: any = (() => {
   if (imagesRecord[src]) {
     return imagesRecord[src]
   }
   return src
-})()  
---- 
+})()
+---
 <Picture
   src={imageSrc}
   alt={alt}

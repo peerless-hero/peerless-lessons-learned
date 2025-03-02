@@ -1,36 +1,35 @@
 ---
-import type { GetStaticPaths } from "astro";
-import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import PostCard from "@components/CommonCard.astro";
-import Pagination from "@components/Pagination.astro";
-import { getTagMetadata } from "@consts";
-import { getEnglishTag } from "@utils/tagMapping";
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import PostCard from '@components/CommonCard.astro'
+import Pagination from '@components/Pagination.astro'
+import { getTagMetadata } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getEnglishTag } from '@utils/tagMapping'
+import { getCollection } from 'astro:content'
 
-type Post = CollectionEntry<"posts">;
+type Post = CollectionEntry<'posts'>
 
 interface PageProps {
-  data: Post[];
-  currentPage: number;
-  lastPage: number;
+  data: Post[]
+  currentPage: number
+  lastPage: number
 }
 
 export const getStaticPaths = (async () => {
-  const allPosts = await getCollection("posts", ({ id }) =>
-    id.startsWith("cn/"),
-  );
-  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+  const allPosts = await getCollection('posts', ({ id }) =>
+    id.startsWith('cn/'))
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))]
 
   return uniqueTags.flatMap((tag) => {
-    const englishTag = getEnglishTag(tag);
+    const englishTag = getEnglishTag(tag)
     const filteredPosts = allPosts.filter(
-      (post) =>
+      post =>
         post.data.tags.includes(tag) || post.data.tags.includes(englishTag),
-    );
+    )
 
-    const pageSize = 12;
-    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+    const pageSize = 12
+    const totalPages = Math.ceil(filteredPosts.length / pageSize)
 
     return Array.from({ length: totalPages }, (_, index) => ({
       params: { tag, page: (index + 1).toString() },
@@ -41,29 +40,29 @@ export const getStaticPaths = (async () => {
           lastPage: totalPages,
         },
       },
-    }));
-  });
-}) satisfies GetStaticPaths;
+    }))
+  })
+}) satisfies GetStaticPaths
 
 interface Props {
-  page: PageProps;
+  page: PageProps
 }
 
-const { tag } = Astro.params;
-const { page } = Astro.props as Props;
+const { tag } = Astro.params
+const { page } = Astro.props as Props
 
-if (typeof tag !== "string") {
-  throw new Error("Invalid tag parameter");
+if (typeof tag !== 'string') {
+  throw new TypeError('Invalid tag parameter')
 }
 
-const currentLocale = "zh";
+const currentLocale = 'zh'
 const { title, description } = getTagMetadata(tag, currentLocale);
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="mx-auto max-w-4xl px-4 py-8">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map((post) => <PostCard post={post} />)}
+      {page.data.map(post => <PostCard post={post} />)}
     </div>
 
     <Pagination

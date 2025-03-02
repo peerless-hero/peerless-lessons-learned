@@ -1,14 +1,15 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { getConstants } from "@consts";
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { Icon } from 'astro-icon/components'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const currentLocale = "en";
-const constants = getConstants(currentLocale);
+const currentLocale = 'en'
+const constants = getConstants(currentLocale)
 
-const safeGetRelativeLocaleUrl = (path: string) =>
-  getRelativeLocaleUrl(currentLocale, path);
+function safeGetRelativeLocaleUrl(path: string) {
+  return getRelativeLocaleUrl(currentLocale, path)
+}
 ---
 
 <BaseLayout
@@ -33,7 +34,7 @@ const safeGetRelativeLocaleUrl = (path: string) =>
       >
         <a
           class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-neutral-400 px-4 py-3 text-sm font-semibold text-white hover:bg-neutral-600 disabled:pointer-events-none disabled:opacity-50 sm:w-auto"
-          href={safeGetRelativeLocaleUrl("/")}
+          href={safeGetRelativeLocaleUrl('/')}
         >
           <Icon name="tabler:chevron-left" class="icon-base" />
           {constants.GO_TO_HOMEPAGE}

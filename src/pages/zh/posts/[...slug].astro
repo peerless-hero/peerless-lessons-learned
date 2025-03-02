@@ -1,32 +1,32 @@
 ---
-import type { GetStaticPaths } from "astro";
-import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import RelatedPostsCard from "@components/RelatedPostsCard.astro";
-import FormattedDate from "@components/FormattedDate.astro";
-import OptimizedCover from "@components/OptimizedPicture.astro";
-import { getConstants } from "@consts";
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import FormattedDate from '@components/FormattedDate.astro'
+import OptimizedCover from '@components/OptimizedPicture.astro'
+import RelatedPostsCard from '@components/RelatedPostsCard.astro'
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("posts", ({ id }) => id.startsWith("cn/"));
-  return posts.map((post) => ({
+  const posts = await getCollection('posts', ({ id }) => id.startsWith('cn/'))
+  return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },
-  }));
-}) satisfies GetStaticPaths;
+  }))
+}) satisfies GetStaticPaths
 
 type Props = {
-  post: CollectionEntry<"posts">;
-};
+  post: CollectionEntry<'posts'>
+}
 
-const { post } = Astro.props as Props;
-const { Content } = await post.render();
+const { post } = Astro.props as Props
+const { Content } = await post.render()
 
-const currentLocale = "zh";
-const constants = getConstants(currentLocale);
+const currentLocale = 'zh'
+const constants = getConstants(currentLocale)
 
-const title = `${post.data.title} - ${constants.SITE_TITLE}`;
+const title = `${post.data.title} - ${constants.SITE_TITLE}`
 const description = post.data.description || constants.SITE_DESCRIPTION;
 ---
 
@@ -41,7 +41,7 @@ const description = post.data.description || constants.SITE_DESCRIPTION;
           post.data.cover && (
             <OptimizedCover
               src={post.data.cover}
-              alt={post.data.coverAlt || ""}
+              alt={post.data.coverAlt || ''}
             />
           )
         }
@@ -51,7 +51,7 @@ const description = post.data.description || constants.SITE_DESCRIPTION;
       </div>
       <div class="prose-a:no-underline">
         {
-          post.data.tags.map((tag) => (
+          post.data.tags.map(tag => (
             <span class="mb-2 mr-2 inline-block rounded-full bg-neutral-200 px-3 py-1 text-sm hover:bg-neutral-500 dark:bg-neutral-600">
               <a href={`/zh/tags/${tag}/1/`}>{tag}</a>
             </span>
@@ -62,7 +62,7 @@ const description = post.data.description || constants.SITE_DESCRIPTION;
         <small>
           发布于 <FormattedDate date={post.data.pubDate} />，更新于 <FormattedDate
             date={new Date().toISOString()}
-          />
+                                                             />
         </small>
       </div>
     </article>

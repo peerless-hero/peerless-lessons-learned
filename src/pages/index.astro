@@ -1,26 +1,26 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import HeroCard from "@components/HeroCard.astro";
-import Card from "@components/CommonCard.astro";
-import Pagination from "@components/Pagination.astro";
-import { getConstants } from "@consts";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import Card from '@components/CommonCard.astro'
+import HeroCard from '@components/HeroCard.astro'
+import Pagination from '@components/Pagination.astro'
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const currentLocale = "zh";
-const constants = getConstants(currentLocale);
+const currentLocale = 'zh'
+const constants = getConstants(currentLocale)
 
-const allPosts = await getCollection("posts", ({ id }) => id.startsWith(`cn/`));
+const allPosts = await getCollection('posts', ({ id }) => id.startsWith(`cn/`))
 allPosts.sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
-);
+)
 
-const postsPerPage = 15;
-const firstPagePosts = allPosts.slice(0, postsPerPage);
-const totalPages = Math.ceil(allPosts.length / postsPerPage);
+const postsPerPage = 15
+const firstPagePosts = allPosts.slice(0, postsPerPage)
+const totalPages = Math.ceil(allPosts.length / postsPerPage)
 
-const basePath = "/en/page/";
+const basePath = '/en/page/';
 ---
 
 <BaseLayout
@@ -34,11 +34,11 @@ const basePath = "/en/page/";
       </div>
 
       <div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
-        {firstPagePosts.slice(1, 3).map((post) => <Card post={post} />)}
+        {firstPagePosts.slice(1, 3).map(post => <Card post={post} />)}
       </div>
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {firstPagePosts.slice(3).map((post) => <Card post={post} />)}
+        {firstPagePosts.slice(3).map(post => <Card post={post} />)}
       </div>
     </div>
 
@@ -47,7 +47,7 @@ const basePath = "/en/page/";
       lastPage={totalPages}
       urlPrev={null}
       urlNext={totalPages > 1
-        ? getRelativeLocaleUrl(currentLocale, "page/2")
+        ? getRelativeLocaleUrl(currentLocale, 'page/2')
         : null}
       basePath={basePath}
       maxDisplayedPages={5}

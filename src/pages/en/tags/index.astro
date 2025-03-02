@@ -1,23 +1,24 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { getConstants } from "@consts";
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
 
-const currentLocale = "en";
-const constants = getConstants(currentLocale);
+const currentLocale = 'en'
+const constants = getConstants(currentLocale)
 
-const allPosts = await getCollection("posts", ({ id }) => id.startsWith("us/"));
+const allPosts = await getCollection('posts', ({ id }) => id.startsWith('us/'))
 
-let tagCounts: { [key: string]: number } = {};
+const tagCounts: { [key: string]: number } = {}
 allPosts.forEach((post) => {
   (post.data.tags || []).forEach((tag) => {
     if (tag in tagCounts) {
-      tagCounts[tag] += 1;
-    } else {
-      tagCounts[tag] = 1;
+      tagCounts[tag] += 1
     }
-  });
-});
+ else {
+      tagCounts[tag] = 1
+    }
+  })
+})
 
 const tags = Object.keys(tagCounts);
 ---
@@ -29,7 +30,7 @@ const tags = Object.keys(tagCounts);
   <div class="prose prose-lg mx-auto p-6">
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
       {
-        tags.map((tag) => (
+        tags.map(tag => (
           <a
             href={`/en/tags/${tag}/1/`}
             class="rounded-full bg-neutral-200 px-3 py-2 text-center text-sm font-semibold no-underline hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"
