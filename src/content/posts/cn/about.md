@@ -20,7 +20,9 @@ author: peerless_hero
 
 ## 网站地址
 
-国内：[https://peerless.vip](https://peerless.vip)
+[https://peerless.vip](https://peerless.vip)
+
+国内部署在腾讯云，海外部署在 Cloudflare Pages。
 
 ## 网站内容
 
