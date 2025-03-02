@@ -6,7 +6,7 @@ category:
 tags:
   - uniapp
 pubDate: 2024-09-14
-cover: https://images.unsplash.com/photo-1516557070061-c3d1653fa646??w=1960&h=1102&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2t8ZW58MHwwfDB8fHwy
+cover: /src/assets/uniapp-logo.jpg
 coverAlt: uniapp
 author: peerless_hero
 ---
