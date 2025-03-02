@@ -5,7 +5,7 @@ category:
   - DevGuide
 tags:
   - rspack
-  - ai
+  - AI
   - cloudflare
 pubDate: 2025-03-03
 cover: /src/assets/ai-album.png
