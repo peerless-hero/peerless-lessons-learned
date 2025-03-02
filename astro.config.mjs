@@ -2,7 +2,7 @@
  * @Author: peerless_hero peerless_hero@outlook.com
  * @Date: 2024-09-07 03:45:19
  * @LastEditors: peerless_hero peerless_hero@outlook.com
- * @LastEditTime: 2025-01-18 23:34:17
+ * @LastEditTime: 2025-03-02 23:30:50
  * @FilePath: \peerless-lessons-learned\astro.config.mjs
  * @Description:
  *
@@ -54,6 +54,7 @@ export default defineConfig({
         'tabler': ['*'],
         'flagpack': ['*'],
         'flat-color-icons': ['*'],
+        'octicon': ['mark-github-24'],
       },
     }),
   ],

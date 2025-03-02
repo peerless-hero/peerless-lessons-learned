@@ -32,6 +32,7 @@
     "@antfu/eslint-config": "^3.7.1",
     "@iconify-json/flagpack": "^1.1.14",
     "@iconify-json/flat-color-icons": "^1.1.10",
+    "@iconify-json/octicon": "^1.2.5",
     "@iconify-json/tabler": "^1.1.115",
     "@tailwindcss/typography": "^0.5.13",
     "eslint": "^9.11.0",

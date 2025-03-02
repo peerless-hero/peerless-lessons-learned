@@ -704,6 +704,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/octicon@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.npmmirror.com/@iconify-json/octicon/-/octicon-1.2.5.tgz#30740e7a7ae6c248d8a6b616a4a436df9a17ee22"
+  integrity sha512-FVFjjmAC1R1Feis9k+COO3WvL3yumk0E7RxNvOEGT9K8CDp05k3Qg2lLlynBzZrSfuT1DhReJUUXFAj60ZHkpA==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/tabler@^1.1.115":
   version "1.2.13"
   resolved "https://registry.npmmirror.com/@iconify-json/tabler/-/tabler-1.2.13.tgz#4fc38971b99ea7cba15ca0f2da5162de16ec25f4"
