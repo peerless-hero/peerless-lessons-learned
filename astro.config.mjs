@@ -2,7 +2,7 @@
  * @Author: peerless_hero peerless_hero@outlook.com
  * @Date: 2024-09-07 03:45:19
  * @LastEditors: peerless_hero peerless_hero@outlook.com
- * @LastEditTime: 2025-03-02 23:30:50
+ * @LastEditTime: 2025-07-13 00:04:04
  * @FilePath: \peerless-lessons-learned\astro.config.mjs
  * @Description:
  *
@@ -32,14 +32,6 @@ export default defineConfig({
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
     },
-  },
-  image: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.unsplash.com',
-      },
-    ],
   },
   markdown: {
     remarkPlugins: [remarkModifiedTime],
