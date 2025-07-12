@@ -16,16 +16,16 @@ author: peerless_hero
 
 以下是官网的截图存档：
 
-<img alt="官网截图留存" src="/src/assets/vue-conf-2025/screenshot_12_7-2025_vueconf.cn.jpeg" >
+<img alt="官网截图留存" src="/img/vue-conf-2025/screenshot_12_7-2025_vueconf.cn.jpeg" >
 
 本人购票参加了本次盛会，亲眼见到了尤雨溪本人；
 
-<img alt="尤雨溪" src="/src/assets/vue-conf-2025/IMG_20250712_093702.jpg" >
+<img alt="尤雨溪" src="/img/vue-conf-2025/IMG_20250712_093702.jpg" >
 
 还偶遇了Anthony Fu并与其合影。
 
-<img alt="Anthony Fu" src="/src/assets/vue-conf-2025/IMG_20250712_121641.jpg" >
+<img alt="Anthony Fu" src="/img/vue-conf-2025/IMG_20250712_121641.jpg" >
 
 Conf结束后参与了与尤雨溪的集体合影。
 
-<img alt="集体合影" src="/src/assets/vue-conf-2025/1752318056291.jpeg" >
+<img alt="集体合影" src="/img/vue-conf-2025/1752318056291.jpeg" >
