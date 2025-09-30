@@ -39,6 +39,9 @@
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "5.5.4"
   },
+  "resolutions": {
+    "caniuse-lite": "1.0.30001746"
+  },
   "volta": {
     "node": "22.12.0",
     "yarn": "1.22.22"
