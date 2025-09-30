@@ -1,12 +1,22 @@
-# 静态化部署方案
-# 需要先打包生成dist目录，然后运行
-# 使用阿里云内部镜像仓库；云效环境下，凭证和推送镜像仓库一致
-FROM nginx:1.27.3-alpine-slim
+FROM node:22.12.0-alpine AS build-stage
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY . .
+
+RUN yarn build
+
+FROM nginx:1.27.3-alpine-slim AS production-stage
 
 # 设置时区，使nginx日志的时间变为中国标准时间
 ENV TZ=CST-8
 
-# 此配置可以通过yml的configs选项覆盖
+expose 80
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# 放置在根目录，方便查找
-COPY dist /app
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
