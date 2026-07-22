@@ -32,7 +32,7 @@ const description = post.data.description || constants.SITE_DESCRIPTION
 
 <BaseLayout title={title} description={description}>
   <main>
-    <article class="prose mx-auto dark:prose-invert">
+    <article class="mx-auto prose dark:prose-invert">
       <div class="prose-h1 text-center">
         <h1>{post.data.title}</h1>
       </div>
@@ -45,7 +45,7 @@ const description = post.data.description || constants.SITE_DESCRIPTION
       <div class="prose-a:no-underline">
         {
           post.data.tags.map((tag) => (
-            <span class="mb-2 mr-2 inline-block rounded-full bg-neutral-200 px-3 py-1 text-sm hover:bg-neutral-500 dark:bg-neutral-600">
+            <span class="mb-2 mr-2 inline-block rounded-full bg-neutral-200 px-3 py-1 text-sm dark:bg-neutral-600 hover:bg-neutral-500">
               <a href={`/zh/tags/${tag}/1/`}>{tag}</a>
             </span>
           ))

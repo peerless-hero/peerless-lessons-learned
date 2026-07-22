@@ -72,11 +72,11 @@ if (currentPath.includes('/posts/') || currentPath.includes('/en/posts/')) {
 const switchLanguageUrl = currentLocale === 'zh' ? enUrl : zhUrl
 ---
 
-<div class="hs-dropdown relative inline-flex [--placement:top-left]">
+<div class="hs-dropdown [--placement:top-left] relative inline-flex">
   <button
     id="footer-language-dropdown"
     type="button"
-    class="hs-dropdown-toggle inline-flex items-center gap-x-2 rounded-lg bg-white px-3 py-2 text-sm text-neutral-800 hover:bg-neutral-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800"
+    class="hs-dropdown-toggle inline-flex items-center gap-x-2 rounded-lg bg-white px-3 py-2 text-sm text-neutral-800 disabled:pointer-events-none dark:border-neutral-700 dark:bg-neutral-900 hover:bg-neutral-50 dark:text-white disabled:opacity-50 dark:hover:bg-neutral-800"
   >
     {
       currentLocale === 'zh' ? (
@@ -97,7 +97,7 @@ const switchLanguageUrl = currentLocale === 'zh' ? enUrl : zhUrl
     />
   </button>
   <div
-    class="hs-dropdown-menu duration z-10 hidden w-40 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:divide-neutral-700 dark:border dark:border-neutral-700 dark:bg-neutral-800"
+    class="hs-dropdown-menu duration z-10 hidden w-40 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] dark:border dark:border-neutral-700 dark:bg-neutral-800 hs-dropdown-open:opacity-100 dark:divide-neutral-700"
     aria-labelledby="footer-language-dropdown"
   >
     <a

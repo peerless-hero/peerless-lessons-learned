@@ -54,7 +54,7 @@ const { title, description } = getCategoryMetadata(category, currentLocale)
 
 <BaseLayout title={title} description={description}>
   <div class="mx-auto max-w-4xl px-4 py-8">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2">
       {page.data.map((post) => <PostCard post={post} />)}
     </div>
 
