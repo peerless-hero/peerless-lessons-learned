@@ -1,7 +1,6 @@
 {
   "installCommand": "yarn install",
   "buildCommand": "yarn build",
-  "nodeVersion": "22.11.0",
   "headers": [
     {
       "source": "/*",
