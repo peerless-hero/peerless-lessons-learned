@@ -9,6 +9,7 @@
       "@en/*": ["src/components/en/*"],
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],
       "@consts": ["src/consts.ts"]
     },
     "strictNullChecks": true
