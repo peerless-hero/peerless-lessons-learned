@@ -20,27 +20,19 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 26
-          cache: yarn
+          cache: pnpm
 
       # 3. 安装依赖
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      # 4. 构建项目（按你的构建命令调整）
-      - name: Build
-        run: yarn build
-
-      # 5. 创建 EdgeOne 项目链接文件
+      # 4. 创建 EdgeOne 项目链接文件
       - name: Create EdgeOne Project Link File
         run: |
           mkdir -p .edgeone
           echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 
-      # 6. 将 edgeone.json 复制到构建输出目录
-      - name: Copy edgeone.json
-        run: cp edgeone.json dist/edgeone.json
-
-      # 7. 部署到 EdgeOne Makers
+      # 5. 部署到 EdgeOne Makers
       - name: Deploy to EdgeOne
         run: |
-          npx edgeone makers deploy dist -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
+          npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
