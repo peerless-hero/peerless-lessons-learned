@@ -10,7 +10,7 @@
 import { env } from 'node:process'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
+import unocss from '@unocss/astro'
 import icon from 'astro-icon'
 import pagefind from 'astro-pagefind'
 import { defineConfig } from 'astro/config'
@@ -43,7 +43,9 @@ export default defineConfig({
     sitemap(),
     mdx(),
     pagefind(),
-    tailwind(),
+    unocss({
+      injectReset: true,
+    }),
     icon({
       include: {
         'tabler': ['*'],
