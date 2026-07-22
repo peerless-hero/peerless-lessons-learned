@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],

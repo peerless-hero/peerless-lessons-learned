@@ -6,12 +6,12 @@ import OptimizedCover from '@components/OptimizedPicture.astro'
 import RelatedPostsCard from '@components/RelatedPostsCard.astro'
 import { getConstants } from '@consts'
 import BaseLayout from '@layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('posts', ({ id }) => id.startsWith('us/'))
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }))
 }) satisfies GetStaticPaths
@@ -21,7 +21,7 @@ type Props = {
 }
 
 const { post } = Astro.props as Props
-const { Content } = await post.render()
+const { Content } = await render(post)
 
 const currentLocale = 'en'
 const constants = getConstants(currentLocale)
@@ -57,7 +57,7 @@ const constants = getConstants(currentLocale)
       </div>
     </article>
     <div class="mt-4">
-      <RelatedPostsCard currentCategory={post.data.category[0]} currentSlug={post.slug} />
+      <RelatedPostsCard currentCategory={post.data.category[0]} currentSlug={post.id} />
     </div>
   </main>
 </BaseLayout>

@@ -9,7 +9,7 @@ export async function GET(context) {
   let posts = await getCollection('posts', ({ id }) => id.startsWith('cn/'))
 
   posts = posts
-    .sort((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate))
+    .toSorted((a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate))
     .slice(0, 3)
 
   return rss({
@@ -21,7 +21,7 @@ export async function GET(context) {
     items: posts.map(post => ({
       title: post.data.title,
       description: post.data.description,
-      link: `/zh/posts/${post.slug.split('/').pop()}`,
+      link: `/zh/posts/${post.id.split('/').pop()}`,
       pubDate: post.data.pubDate,
       content: post.body,
       customData: post.data.customData,

@@ -1,19 +1,19 @@
 /*
  * @Author: peerless_hero peerless_hero@outlook.com
- * @Date: 2024-09-07 03:45:19
+ * @Date: 2026-07-23 00:06:18
  * @LastEditors: peerless_hero peerless_hero@outlook.com
- * @LastEditTime: 2026-07-22 23:43:01
- * @FilePath: \peerless-lessons-learned\src\content\config.ts
- * @Description:
- *
+ * @LastEditTime: 2026-07-23 00:14:24
+ * @FilePath: \peerless-lessons-learned\src\content.config.ts
+ * @Description: 内容配置
  */
+import { glob } from 'astro/loaders'
+import { z } from 'astro/zod'
 import { defineCollection } from 'astro:content'
-import { z } from 'zod'
 
-const globs = import.meta.glob<string>('../assets/*', { eager: true, import: 'default' })
+const globs = import.meta.glob<string>('./assets/*', { eager: true, import: 'default' })
 
 const posts = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/posts' }),
   schema: z.object({
     title: z.string(),
     pubDate: z.date(),

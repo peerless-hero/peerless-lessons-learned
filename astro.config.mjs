@@ -2,12 +2,13 @@
  * @Author: peerless_hero peerless_hero@outlook.com
  * @Date: 2024-09-07 03:45:19
  * @LastEditors: peerless_hero peerless_hero@outlook.com
- * @LastEditTime: 2025-10-01 01:14:18
+ * @LastEditTime: 2026-07-23 00:25:58
  * @FilePath: \peerless-lessons-learned\astro.config.mjs
  * @Description:
  *
  */
 import { env } from 'node:process'
+import { unified } from '@astrojs/markdown-remark'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import unocss from '@unocss/astro'
@@ -22,6 +23,11 @@ export default defineConfig({
   },
   site: 'https://www.peerless.vip/',
   trailingSlash: 'always',
+  vite: {
+    ssr: {
+      noExternal: ['astro-pagefind'],
+    },
+  },
   prefetch: {
     prefetchAll: true,
   },
@@ -34,10 +40,18 @@ export default defineConfig({
     },
   },
   image: {
-    remotePatterns: [],
+    dangerouslyProcessSVG: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   markdown: {
-    remarkPlugins: [remarkModifiedTime],
+    processor: unified({
+      remarkPlugins: [remarkModifiedTime],
+    }),
   },
   integrations: [
     sitemap(),

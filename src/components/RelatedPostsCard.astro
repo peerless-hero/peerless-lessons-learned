@@ -18,7 +18,7 @@ async function getRelatedArticlesByCategory(): Promise<CollectionEntry<'posts'>[
     return id.startsWith(`${currentLocale === 'zh' ? 'cn' : 'us'}/`)
   })
   return allPosts
-    .filter((post) => post.data.category.includes(currentCategory) && post.slug !== currentSlug)
+    .filter((post) => post.data.category.includes(currentCategory) && post.id !== currentSlug)
     .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
     .slice(0, 3)
 }
@@ -34,7 +34,7 @@ function safeGetRelativeLocaleUrl(path: string) {
   {
     relatedPosts.map((post) => (
       <div class="relative mb-4 overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:scale-105 dark:bg-neutral-900 hover:-translate-y-1">
-        <a href={safeGetRelativeLocaleUrl(`posts/${post.slug}`)}>
+        <a href={safeGetRelativeLocaleUrl(`posts/${post.id}`)}>
           <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
           <div class="absolute end-0 start-0 bottom-0 p-4 bg-gradient-to-t md:p-5">
             <div class="mt-16 flex items-center gap-4 text-xs text-white">
