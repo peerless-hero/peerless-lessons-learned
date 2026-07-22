@@ -2,12 +2,13 @@
  * @Author: peerless_hero peerless_hero@outlook.com
  * @Date: 2024-09-07 03:45:19
  * @LastEditors: peerless_hero peerless_hero@outlook.com
- * @LastEditTime: 2024-09-22 00:21:46
+ * @LastEditTime: 2026-07-22 23:43:01
  * @FilePath: \peerless-lessons-learned\src\content\config.ts
  * @Description:
  *
  */
-import { defineCollection, z } from 'astro:content'
+import { defineCollection } from 'astro:content'
+import { z } from 'zod'
 
 const globs = import.meta.glob<string>('../assets/*', { eager: true, import: 'default' })
 

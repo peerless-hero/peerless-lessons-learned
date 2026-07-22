@@ -41,7 +41,8 @@
     "eslint-plugin-format": "^2.0.1",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "5.5.4",
-    "unocss": "^66.7.5"
+    "unocss": "^66.7.5",
+    "zod": "^4.4.3"
   },
   "volta": {
     "node": "26.3.0",
