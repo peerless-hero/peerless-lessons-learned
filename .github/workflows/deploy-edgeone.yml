@@ -3,7 +3,7 @@ name: Deploy to EdgeOne Makers
 on:
   push:
     branches:
-      - main # 主分支推送时触发\
+      - main # 主分支推送时触发
   workflow_dispatch: # 支持手动触发
 
 jobs:
@@ -15,24 +15,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      # 2. 安装 Node.js（按你的项目版本调整）
+      # 2. 安装 pnpm
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v6
+
+      # 3. 安装 Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 26
           cache: pnpm
 
-      # 3. 安装依赖
+      # 4. 安装依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 4. 创建 EdgeOne 项目链接文件
+      # 5. 创建 EdgeOne 项目链接文件
       - name: Create EdgeOne Project Link File
         run: |
           mkdir -p .edgeone
           echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 
-      # 5. 部署到 EdgeOne Makers
+      # 6. 部署到 EdgeOne Makers
       - name: Deploy to EdgeOne
         run: |
           npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
