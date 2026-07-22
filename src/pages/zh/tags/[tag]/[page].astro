@@ -17,16 +17,12 @@ interface PageProps {
 }
 
 export const getStaticPaths = (async () => {
-  const allPosts = await getCollection('posts', ({ id }) =>
-    id.startsWith('cn/'))
-  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))]
+  const allPosts = await getCollection('posts', ({ id }) => id.startsWith('cn/'))
+  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags))]
 
   return uniqueTags.flatMap((tag) => {
     const englishTag = getEnglishTag(tag)
-    const filteredPosts = allPosts.filter(
-      post =>
-        post.data.tags.includes(tag) || post.data.tags.includes(englishTag),
-    )
+    const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag) || post.data.tags.includes(englishTag))
 
     const pageSize = 12
     const totalPages = Math.ceil(filteredPosts.length / pageSize)
@@ -56,24 +52,20 @@ if (typeof tag !== 'string') {
 }
 
 const currentLocale = 'zh'
-const { title, description } = getTagMetadata(tag, currentLocale);
+const { title, description } = getTagMetadata(tag, currentLocale)
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="mx-auto max-w-4xl px-4 py-8">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map(post => <PostCard post={post} />)}
+      {page.data.map((post) => <PostCard post={post} />)}
     </div>
 
     <Pagination
       currentPage={page.currentPage}
       lastPage={page.lastPage}
-      urlPrev={page.currentPage > 1
-        ? `/zh/tags/${tag}/${page.currentPage - 1}`
-        : null}
-      urlNext={page.currentPage < page.lastPage
-        ? `/zh/tags/${tag}/${page.currentPage + 1}`
-        : null}
+      urlPrev={page.currentPage > 1 ? `/zh/tags/${tag}/${page.currentPage - 1}` : null}
+      urlNext={page.currentPage < page.lastPage ? `/zh/tags/${tag}/${page.currentPage + 1}` : null}
       basePath={`/zh/tags/${tag}`}
       maxDisplayedPages={5}
     />

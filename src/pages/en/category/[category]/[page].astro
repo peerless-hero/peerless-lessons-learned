@@ -8,20 +8,12 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
 
 export const getStaticPaths = (async () => {
-  const allPosts = await getCollection('posts', ({ id }) =>
-    id.startsWith('us/'))
-  const uniqueCategories = [
-    ...new Set(allPosts.flatMap(post => post.data.category)),
-  ]
+  const allPosts = await getCollection('posts', ({ id }) => id.startsWith('us/'))
+  const uniqueCategories = [...new Set(allPosts.flatMap((post) => post.data.category))]
 
   return uniqueCategories.flatMap((category) => {
-    const filteredPosts = allPosts.filter(post =>
-      post.data.category.includes(category),
-    )
-    filteredPosts.sort(
-      (a, b) =>
-        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
-    )
+    const filteredPosts = allPosts.filter((post) => post.data.category.includes(category))
+    filteredPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
 
     const pageSize = 12
     const totalPages = Math.ceil(filteredPosts.length / pageSize)
@@ -57,24 +49,20 @@ if (typeof category !== 'string') {
 }
 
 const currentLocale = 'en'
-const { title, description } = getCategoryMetadata(category, currentLocale);
+const { title, description } = getCategoryMetadata(category, currentLocale)
 ---
 
 <BaseLayout title={title} description={description}>
   <div class="mx-auto max-w-4xl px-4 py-8">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {page.data.map(post => <PostCard post={post} />)}
+      {page.data.map((post) => <PostCard post={post} />)}
     </div>
 
     <Pagination
       currentPage={page.currentPage}
       lastPage={page.lastPage}
-      urlPrev={page.currentPage > 1
-        ? `/en/category/${category}/${page.currentPage - 1}`
-        : null}
-      urlNext={page.currentPage < page.lastPage
-        ? `/en/category/${category}/${page.currentPage + 1}`
-        : null}
+      urlPrev={page.currentPage > 1 ? `/en/category/${category}/${page.currentPage - 1}` : null}
+      urlNext={page.currentPage < page.lastPage ? `/en/category/${category}/${page.currentPage + 1}` : null}
       basePath={`/en/category/${category}`}
       maxDisplayedPages={5}
     />

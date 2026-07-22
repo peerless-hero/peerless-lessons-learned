@@ -10,7 +10,7 @@ import { getCollection } from 'astro:content'
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('posts', ({ id }) => id.startsWith('us/'))
-  return posts.map(post => ({
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }))
@@ -24,7 +24,7 @@ const { post } = Astro.props as Props
 const { Content } = await post.render()
 
 const currentLocale = 'en'
-const constants = getConstants(currentLocale);
+const constants = getConstants(currentLocale)
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -34,21 +34,14 @@ const constants = getConstants(currentLocale);
         <h1>{post.data.title}</h1>
       </div>
       <div>
-        {
-          post.data.cover && (
-            <OptimizedCover
-              src={post.data.cover}
-              alt={post.data.coverAlt || ''}
-            />
-          )
-        }
+        {post.data.cover && <OptimizedCover src={post.data.cover} alt={post.data.coverAlt || ''} />}
       </div>
       <div>
         <Content />
       </div>
       <div class="prose-a:no-underline">
         {
-          post.data.tags.map(tag => (
+          post.data.tags.map((tag) => (
             <span class="mb-2 mr-2 inline-block rounded-full bg-neutral-200 px-3 py-1 text-sm hover:bg-neutral-500 dark:bg-neutral-600">
               <a href={`/en/tags/${tag}/1/`}>{tag}</a>
             </span>
@@ -64,10 +57,7 @@ const constants = getConstants(currentLocale);
       </div>
     </article>
     <div class="mt-4">
-      <RelatedPostsCard
-        currentCategory={post.data.category[0]}
-        currentSlug={post.slug}
-      />
+      <RelatedPostsCard currentCategory={post.data.category[0]} currentSlug={post.slug} />
     </div>
   </main>
 </BaseLayout>

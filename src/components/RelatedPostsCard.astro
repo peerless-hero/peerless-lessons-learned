@@ -13,22 +13,13 @@ interface Props {
 const { currentCategory, currentSlug } = Astro.props
 const currentLocale = Astro.currentLocale ?? 'zh'
 
-async function getRelatedArticlesByCategory(): Promise<
-  CollectionEntry<'posts'>[]
-> {
+async function getRelatedArticlesByCategory(): Promise<CollectionEntry<'posts'>[]> {
   const allPosts = await getCollection('posts', ({ id }) => {
     return id.startsWith(`${currentLocale === 'zh' ? 'cn' : 'us'}/`)
   })
   return allPosts
-    .filter(
-      post =>
-        post.data.category.includes(currentCategory)
-        && post.slug !== currentSlug,
-    )
-    .sort(
-      (a, b) =>
-        new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
-    )
+    .filter((post) => post.data.category.includes(currentCategory) && post.slug !== currentSlug)
+    .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
     .slice(0, 3)
 }
 
@@ -41,7 +32,7 @@ function safeGetRelativeLocaleUrl(path: string) {
 
 <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
   {
-    relatedPosts.map(post => (
+    relatedPosts.map((post) => (
       <div class="relative mb-4 overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:-translate-y-1 hover:scale-105 dark:bg-neutral-900">
         <a href={safeGetRelativeLocaleUrl(`posts/${post.slug}`)}>
           <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />

@@ -10,6 +10,7 @@ cover: /src/assets/uniapp-logo.jpg
 coverAlt: uniapp
 author: peerless_hero
 ---
+
 ## 热更新的概念
 
 热更新指的是在不停止应用的情况下，更新应用的功能、资源、界面等。
@@ -26,7 +27,7 @@ author: peerless_hero
    - 需开通对象存储服务，并创建存储空间。
 
 2. **一个uniapp项目**：
-准备一个uniapp项目，并完成基本开发。
+   准备一个uniapp项目，并完成基本开发。
 
 ## 特别提醒
 

@@ -9,8 +9,7 @@ const currentLocale = Astro.currentLocale ?? 'zh'
 
 if (currentLocale === 'zh') {
   navData = await import('@utils/zh/headernav')
-}
- else {
+} else {
   navData = await import('@utils/en/headernav')
 }
 
@@ -20,7 +19,7 @@ function safeGetRelativeLocaleUrl(path: string) {
   return getRelativeLocaleUrl(currentLocale, path)
 }
 
-const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLessonsLearned';
+const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLessonsLearned'
 ---
 
 <header class="z-50 flex w-full flex-wrap py-7 lg:flex-nowrap lg:justify-start">
@@ -38,9 +37,7 @@ const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLe
       </a>
     </div>
 
-    <div
-      class="ms-auto flex items-center gap-x-2 py-1 lg:order-3 lg:col-span-3 lg:ps-6"
-    >
+    <div class="ms-auto flex items-center gap-x-2 py-1 lg:order-3 lg:col-span-3 lg:ps-6">
       <button
         type="button"
         onclick={`window.location.href='${safeGetRelativeLocaleUrl('/search/')}'`}
@@ -75,14 +72,8 @@ const brandName = currentLocale === 'zh' ? '无双的经验之谈' : 'PeerlessLe
           aria-controls="navbar-collapse-with-animation"
           aria-label="Toggle navigation"
         >
-          <Icon
-            name="tabler:menu-2"
-            class="size-4 flex-shrink-0 hs-collapse-open:hidden"
-          />
-          <Icon
-            name="tabler:menu-order"
-            class="hidden size-4 flex-shrink-0 hs-collapse-open:block"
-          />
+          <Icon name="tabler:menu-2" class="size-4 flex-shrink-0 hs-collapse-open:hidden" />
+          <Icon name="tabler:menu-order" class="hidden size-4 flex-shrink-0 hs-collapse-open:block" />
         </button>
       </div>
       <a

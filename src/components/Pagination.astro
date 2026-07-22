@@ -10,21 +10,11 @@ export interface Props {
   maxDisplayedPages: number
 }
 
-const {
-  currentPage,
-  lastPage,
-  urlPrev,
-  urlNext,
-  basePath,
-  maxDisplayedPages = 5,
-} = Astro.props
+const { currentPage, lastPage, urlPrev, urlNext, basePath, maxDisplayedPages = 5 } = Astro.props
 
 const startPage = Math.max(
   1,
-  Math.min(
-    currentPage - Math.floor(maxDisplayedPages / 2),
-    lastPage - maxDisplayedPages + 1,
-  ),
+  Math.min(currentPage - Math.floor(maxDisplayedPages / 2), lastPage - maxDisplayedPages + 1),
 )
 const endPage = Math.min(lastPage, startPage + maxDisplayedPages - 1)
 
@@ -32,16 +22,12 @@ function ensureTrailingSlash(path: string) {
   return path.endsWith('/') ? path : `${path}/`
 }
 
-const computedBasePath = basePath ? ensureTrailingSlash(basePath) : '/page/';
+const computedBasePath = basePath ? ensureTrailingSlash(basePath) : '/page/'
 ---
 
-<nav
-  class="mt-8 flex items-center justify-center gap-x-1"
-  aria-label="Pagination"
->
+<nav class="mt-8 flex items-center justify-center gap-x-1" aria-label="Pagination">
   {
-    urlPrev
-? (
+    urlPrev ? (
       <a
         href={ensureTrailingSlash(urlPrev)}
         aria-label="Previous page"
@@ -49,8 +35,7 @@ const computedBasePath = basePath ? ensureTrailingSlash(basePath) : '/page/';
       >
         <Icon name="tabler:chevron-left" class="icon-base" />
       </a>
-    )
-: (
+    ) : (
       ''
     )
   }
@@ -75,8 +60,7 @@ const computedBasePath = basePath ? ensureTrailingSlash(basePath) : '/page/';
     }
   </ul>
   {
-    urlNext
-? (
+    urlNext ? (
       <a
         href={ensureTrailingSlash(urlNext)}
         aria-label="Next page"
@@ -84,8 +68,7 @@ const computedBasePath = basePath ? ensureTrailingSlash(basePath) : '/page/';
       >
         <Icon name="tabler:chevron-right" class="icon-base" />
       </a>
-    )
-: (
+    ) : (
       ''
     )
   }

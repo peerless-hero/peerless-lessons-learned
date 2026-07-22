@@ -10,10 +10,7 @@ const allPosts = await getCollection('posts', ({ id }) => {
   return id.startsWith(`${currentLocale === 'zh' ? 'cn' : 'us'}/`)
 })
 
-allPosts.sort(
-  (a, b) =>
-    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
-)
+allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
 
 const latestPosts = allPosts.slice(0, 3)
 
@@ -25,7 +22,7 @@ function safeGetRelativeLocaleUrl(path: string) {
 <div class="mx-auto max-w-[85rem] px-4 py-4 sm:px-4 lg:px-6 lg:py-8">
   <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
     {
-      latestPosts.map(post => (
+      latestPosts.map((post) => (
         <div class="relative mb-4 overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:-translate-y-1 hover:scale-105 dark:bg-neutral-900">
           <a href={safeGetRelativeLocaleUrl(`posts/${post.slug}`)}>
             <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
@@ -34,9 +31,7 @@ function safeGetRelativeLocaleUrl(path: string) {
                 <span>{post.data.tags.join(' ')}</span>
                 <FormattedDate date={post.data.pubDate} />
               </div>
-              <h2 class="mt-2 text-lg font-bold text-white">
-                {post.data.title}
-              </h2>
+              <h2 class="mt-2 text-lg font-bold text-white">{post.data.title}</h2>
             </div>
           </a>
         </div>

@@ -10,6 +10,7 @@ cover: /src/assets/uniapp-logo.jpg
 coverAlt: uniapp
 author: peerless_hero
 ---
+
 ## The Concept of Hot Update
 
 Hot update refers to the ability to update the application's functionality, resources, interface, etc., without stopping the application.

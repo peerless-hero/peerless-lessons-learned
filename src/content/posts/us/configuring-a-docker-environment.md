@@ -62,7 +62,7 @@ To improve the speed of pulling Docker images, you can configure a domestic Dock
    - Execute `sudo mkdir -p /etc/docker` to create the Docker configuration directory.
 
 2. **Edit the Docker Configuration File**:
-Execute `sudo tee /etc/docker/daemon.json <<-'EOF'` and paste the following content (using Alibaba Cloud's mirror as an example):
+   Execute `sudo tee /etc/docker/daemon.json <<-'EOF'` and paste the following content (using Alibaba Cloud's mirror as an example):
 
 ```sh
 {

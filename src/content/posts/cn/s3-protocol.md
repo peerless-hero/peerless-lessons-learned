@@ -10,6 +10,7 @@ cover: /src/assets/s3-protocol.jpeg
 coverAlt: S3协议
 author: peerless_hero
 ---
+
 ## S3协议介绍
 
 S3协议（Simple Storage Service，简单存储服务）是AWS（Amazon Web Services）提供的一种对象存储服务。它是一种RESTful的API接口，可以用来存储和检索任何类型的数据，包括图片、视频、音频、文档、数据等。S3协议支持多种访问方式，包括HTTP、HTTPS、FTP、AWS SDK、CLI、API、GUI等。S3协议的优点是：
