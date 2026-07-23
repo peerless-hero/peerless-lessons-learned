@@ -28,7 +28,17 @@ function safeGetRelativeLocaleUrl(path: string) {
             <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
             <div class="absolute end-0 start-0 bottom-0 p-4 bg-gradient-to-t md:p-5">
               <div class="mt-16 flex items-center gap-4 text-xs text-white">
-                <span>{post.data.tags.join(' ')}</span>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <span class="inline-flex items-center gap-1">
+                    {post.data.tags.slice(0, 2).map((tag: string, i: number) => (
+                      <span class="inline-flex items-center">
+                        {tag}
+                        {i < Math.min(post.data.tags.length, 2) - 1 && <span class="ml-1">,</span>}
+                      </span>
+                    ))}
+                    {post.data.tags.length > 2 && <span class="opacity-60">+{post.data.tags.length - 2}</span>}
+                  </span>
+                )}
                 <FormattedDate date={post.data.pubDate} />
               </div>
               <h2 class="mt-2 text-lg text-white font-bold">{post.data.title}</h2>
