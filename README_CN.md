@@ -4,7 +4,7 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
-本项目用于搭建本人个人的技术分享网站，源码克隆自 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)。
+本项目是我的个人技术分享网站，源码基于 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)（原仓库已被删除或设为私有，无法访问）。
 
 ## 项目为何开源？
 
@@ -13,9 +13,9 @@
 
 ## 网站地址
 
-[https://peerless.vip](https://peerless.vip)
+[https://www.peerless.vip](https://www.peerless.vip)
 
-国内部署在腾讯云，海外部署在 Cloudflare Pages。
+网站部署在腾讯云 [EdgeOne](https://cloud.tencent.com/product/teo)。
 
 ## 网站内容
 

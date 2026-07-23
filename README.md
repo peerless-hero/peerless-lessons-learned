@@ -4,6 +4,8 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
+This is my personal technical blog, built on top of [astroverse-i18n](https://github.com/isooosi/astroverse-i18n) (the original repository has been deleted or set to private and is no longer accessible).
+
 ## Why is the project open source?
 
 -The website itself is in pure document form, without any hidden content.
@@ -13,7 +15,7 @@
 
 [https://peerless.vip](https://peerless.vip)
 
-Domestically deployed on Tencent Cloud, and overseas deployed on Cloudflare pages.
+The website is deployed on Tencent Cloud [EdgeOne](https://www.tencentcloud.com/products/teo).
 
 ## Website Content
 
