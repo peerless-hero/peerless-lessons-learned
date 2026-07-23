@@ -26,7 +26,7 @@ EdgeOne Makers 是**腾讯云 EdgeOne** 推出的全栈开发部署平台，前�
 - **安全防护**：内置 DDoS 防护、Web 防火墙等安全能力
 - **全栈能力**：支持纯静态网站 + 边缘函数（Edge Functions）混合架构
 
-![EdgeOne Pages Flow](/src/assets/edgeone-flow.webp)
+<Image src="/src/assets/edgeone-flow.webp" alt="EdgeOne Pages Flow" />
 
 ## 二、为什么选择 GitHub Actions
 

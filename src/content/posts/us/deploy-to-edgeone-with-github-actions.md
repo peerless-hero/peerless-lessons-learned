@@ -15,9 +15,7 @@ coverAlt: Deploy to EdgeOne with GitHub Actions
 author: peerless_hero
 ---
 
-## 1\. What Is EdgeOne Makers
-
-![EdgeOne Pages Logo](/src/assets/edgeone-logo.png)
+## 1. What Is EdgeOne Makers
 
 **EdgeOne Makers** is the full-stack development and deployment platform from **Tencent Cloud EdgeOne**, formerly known as EdgeOne Pages. It leverages Tencent Cloud's global network of 3,200+ edge nodes to provide static website hosting, edge function computing, object storage, and more — all in one integrated platform.
 
@@ -28,9 +26,9 @@ Compared to traditional cloud server deployment, EdgeOne Makers offers:
 - **Built-in security**: DDoS protection, Web Application Firewall, and other security features out of the box
 - **Full-stack capability**: Supports static sites + edge functions (Edge Functions) hybrid architecture
 
-## 2\. Why GitHub Actions
+<Image src="/src/assets/edgeone-flow.webp" alt="EdgeOne Pages Flow" />
 
-![GitHub Actions Logo](/src/assets/githubactions.svg)
+## 2. Why GitHub Actions
 
 GitHub Actions is GitHub's native CI/CD tool that automatically runs build, test, and deployment tasks on events such as code pushes or pull requests. Combined with EdgeOne Makers, it enables a complete **"code push → auto-build → auto-deploy"** pipeline.
 
@@ -73,7 +71,7 @@ The following table compares the build capabilities of both:
 
 None of the Node versions pre-installed by EdgeOne Makers meet Astro's requirements, so building must be done in GitHub Actions, and only the upload step is handled by the EdgeOne CLI.
 
-## 3\. Prerequisites
+## 3. Prerequisites
 
 Before getting started, complete the following preparations.
 
@@ -140,7 +138,7 @@ This article uses an **Astro** static blog as an example. The project should inc
 }
 ```
 
-## 4\. Configure GitHub Secrets
+## 4. Configure GitHub Secrets
 
 Configure Secrets in your GitHub repository to store sensitive information needed for deployment.
 
@@ -158,7 +156,7 @@ Once configured, these Secrets can be referenced in the workflow using `${{ secr
 
 > If you're new to Secrets, refer to GitHub's official documentation: [Using secrets in GitHub Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
-## 5\. Create the GitHub Actions Workflow
+## 5. Create the GitHub Actions Workflow
 
 Create `.github/workflows/deploy-edgeone.yml` in your project root. Below is a step-by-step breakdown of the complete workflow configuration.
 
@@ -249,7 +247,7 @@ The final step uses the EdgeOne CLI's `makers deploy` command to perform the dep
 
 The CLI automatically reads the `edgeone.json` configuration from the project root, executes `installCommand` (install dependencies) and `buildCommand` (build the project), then uploads the build artifacts to the EdgeOne edge network.
 
-## 6\. Complete Workflow File
+## 6. Complete Workflow File
 
 Combining all the steps above, the complete `.github/workflows/deploy-edgeone.yml` file is as follows:
 
@@ -294,7 +292,7 @@ jobs:
           npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
 ```
 
-## 7\. edgeone.json Configuration
+## 7. edgeone.json Configuration
 
 `edgeone.json` in the project root is the core configuration file for EdgeOne Makers, declaring build commands and deployment behavior. The complete configuration for this project is shown below (note that the `headers` field is required — omitting it will cause the platform to fall back to default response headers):
 
@@ -349,7 +347,7 @@ Configuration highlights:
 
 For complete field documentation and advanced usage, refer to the official docs: [EdgeOne Makers edgeone.json configuration](https://pages.edgeone.ai/document/edgeone-json).
 
-## 8\. Deployment Verification & Monitoring
+## 8. Deployment Verification & Monitoring
 
 ### 8.1 Check Deployment Status
 
@@ -371,7 +369,7 @@ In the EdgeOne Makers console under **Domain Management**:
 2. Add a CNAME record at your DNS provider as instructed
 3. Wait for the SSL certificate to be issued automatically (EdgeOne manages HTTPS certificates automatically)
 
-## 9\. Troubleshooting & Best Practices
+## 9. Troubleshooting & Best Practices
 
 ### 9.1 Build Failure
 
@@ -403,7 +401,7 @@ Then change `-e production` to `-e preview` in the deploy step to create a previ
 - Move large, unchanging dependencies (e.g., `sharp`) to `dependencies` instead of `devDependencies`
 - Use `--frozen-lockfile` to avoid version resolution during install
 
-## 10\. Summary
+## 10. Summary
 
 Combining GitHub Actions with EdgeOne Makers gives us:
 
