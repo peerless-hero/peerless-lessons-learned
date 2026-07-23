@@ -10,7 +10,7 @@ tags:
   - CD
   - Astro
 pubDate: 2026-07-22
-cover: /src/assets/edgeone-logo.png
+cover: /src/assets/edgeone-logo.svg
 coverAlt: Deploy to EdgeOne with GitHub Actions
 author: peerless_hero
 ---
