@@ -1,9 +1,13 @@
 ---
 import LatestPosts from '@components/LatestPosts.astro'
-import OptimizedCover from '@components/OptimizedPicture.astro'
+import { Picture } from 'astro:assets'
 import { getConstants } from '@consts'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
+
+import codingDeveloper from 'src/assets/coding-developer.jpg'
+import techCode from 'src/assets/tech-code.jpg'
+import hikingAdventure from 'src/assets/hiking-adventure.jpg'
 
 const currentLocale = 'en'
 const constants = getConstants(currentLocale)
@@ -12,30 +16,27 @@ const title = `About ${constants.SITE_TITLE}`
 const description = constants.SITE_DESCRIPTION
 const tabs = [
   {
-    icon: 'tabler:yoga',
+    icon: 'tabler:star',
     title: 'Heavenly Stems',
     content:
       'Heavenly Stems represent the timing of the heavens, symbolizing the passage of time and the arrangement of destiny. Each Heavenly Stem is a unique energy symbol, guiding us to find our direction in the flow of time.',
-    image:
-      'https://images.unsplash.com/photo-1516827003699-2880f453d93b?q=80&w=1592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: codingDeveloper,
     imageAlt: 'About the Astral World - Heavenly Stems',
   },
   {
-    icon: 'tabler:swimming',
+    icon: 'tabler:leaf',
     title: 'Earthly Branches',
     content:
       'Earthly Branches symbolize the power of the earth and the operation of human affairs. The combination of Earthly Branches forms the framework of time and space, allowing us to find stability amidst change.',
-    image:
-      'https://images.unsplash.com/photo-1560233026-ad254fa8da38?q=80&w=2759&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: techCode,
     imageAlt: 'About the Astral World - Earthly Branches',
   },
   {
-    icon: 'tabler:run',
+    icon: 'tabler:yin-yang',
     title: 'Yin and Yang',
     content:
       'Yin and Yang are the fundamental laws of the universe, representing opposition and unity. The balance of Yin and Yang allows all things to thrive, teaching us to maintain harmony and balance in life.',
-    image:
-      'https://images.unsplash.com/photo-1520533881-8a3699d7e58b?q=80&w=2572&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: hikingAdventure,
     imageAlt: 'About the Astral World - Yin and Yang',
   },
 ]
@@ -92,10 +93,16 @@ const tabs = [
                     role="tabpanel"
                     aria-labelledby={`tabs-with-card-item-${index + 1}`}
                   >
-                    <OptimizedCover
-                      class="rounded-xl shadow-neutral-200 shadow-xl dark:shadow-neutral-900/20"
+                    <Picture
                       src={tab.image}
                       alt={tab.imageAlt}
+                      width={600}
+                      height={420}
+                      widths={[320, 480, 600]}
+                      sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 600px"
+                      formats={['avif']}
+                      fallbackFormat="avif"
+                      class="rounded-xl object-cover shadow-neutral-200 shadow-xl dark:shadow-neutral-900/20 w-[320px] sm:w-[480px] lg:w-[600px] h-[420px]"
                     />
                   </div>
                 ))

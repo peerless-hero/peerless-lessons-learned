@@ -1,9 +1,13 @@
 ---
 import LatestPosts from '@components/LatestPosts.astro'
-import OptimizedCover from '@components/OptimizedPicture.astro'
+import { Picture } from 'astro:assets'
 import { getConstants } from '@consts'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
+
+import codingDeveloper from 'src/assets/coding-developer.jpg'
+import techCode from 'src/assets/tech-code.jpg'
+import hikingAdventure from 'src/assets/hiking-adventure.jpg'
 
 const currentLocale = 'zh'
 const constants = getConstants(currentLocale)
@@ -12,27 +16,24 @@ const title = `关于 ${constants.SITE_TITLE}`
 const description = constants.SITE_DESCRIPTION
 const tabs = [
   {
-    icon: 'tabler:yoga',
+    icon: 'tabler:code',
     title: '软件开发教程',
     content: '分享个人软件开发中收获到的知识点。',
-    image:
-      'https://images.unsplash.com/photo-1516827003699-2880f453d93b?q=80&w=1592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: codingDeveloper,
     imageAlt: '关于无双的经验之谈 - 软件开发教程',
   },
   {
-    icon: 'tabler:swimming',
+    icon: 'tabler:rocket',
     title: '技术前沿速递',
     content: '定期更新前沿技术的最新研究成果与应用趋势。',
-    image:
-      'https://images.unsplash.com/photo-1560233026-ad254fa8da38?q=80&w=2759&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: techCode,
     imageAlt: '关于无双的经验之谈 - 技术前沿速递',
   },
   {
-    icon: 'tabler:run',
+    icon: 'tabler:heart',
     title: '个人生活杂谈',
     content: '分享个人生活中感兴趣的事情与感悟。',
-    image:
-      'https://images.unsplash.com/photo-1520533881-8a3699d7e58b?q=80&w=2572&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: hikingAdventure,
     imageAlt: '关于无双的经验之谈 - 个人生活杂谈',
   },
 ]
@@ -89,10 +90,16 @@ const tabs = [
                     role="tabpanel"
                     aria-labelledby={`tabs-with-card-item-${index + 1}`}
                   >
-                    <OptimizedCover
-                      class="rounded-xl shadow-neutral-200 shadow-xl dark:shadow-neutral-900/20"
+                    <Picture
                       src={tab.image}
                       alt={tab.imageAlt}
+                      width={600}
+                      height={420}
+                      widths={[320, 480, 600]}
+                      sizes="(max-width: 640px) 320px, (max-width: 1024px) 480px, 600px"
+                      formats={['avif']}
+                      fallbackFormat="avif"
+                      class="rounded-xl object-cover shadow-neutral-200 shadow-xl dark:shadow-neutral-900/20 w-[320px] sm:w-[480px] lg:w-[600px] h-[420px]"
                     />
                   </div>
                 ))

@@ -39,15 +39,6 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  image: {
-    dangerouslyProcessSVG: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-    ],
-  },
   markdown: {
     processor: unified({
       remarkPlugins: [remarkModifiedTime],
