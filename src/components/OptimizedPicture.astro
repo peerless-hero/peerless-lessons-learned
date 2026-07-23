@@ -33,15 +33,23 @@ const imageSrc: any = (() => {
   }
   return src
 })()
+
+const isSvg = typeof src === 'string' && src.endsWith('.svg')
 ---
 
-<Picture
-  src={imageSrc}
-  alt={alt}
-  widths={widths}
-  sizes={sizes}
-  formats={formats}
-  fallbackFormat={fallbackFormat}
-  class={className}
-  inferSize
-/>
+{
+  isSvg ? (
+    <img src={typeof imageSrc === 'string' ? imageSrc : imageSrc.src} alt={alt} class={className} />
+  ) : (
+    <Picture
+      src={imageSrc}
+      alt={alt}
+      widths={widths}
+      sizes={sizes}
+      formats={formats}
+      fallbackFormat={fallbackFormat}
+      class={className}
+      inferSize
+    />
+  )
+}
