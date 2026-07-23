@@ -65,7 +65,19 @@ const enUrl = getAlternateLocaleUrl('en')
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 <script>
-  import 'preline/dist/preline.js'
+  import { HSStaticMethods } from 'preline'
+
+  // Preline v2 各组件通过 window.load 事件自动初始化，
+  // 但当 script 为 type=module 时，执行时机晚于 load 事件，
+  // 因此需要在 DOM 就绪后显式调用 autoInit() 激活所有 hs-* 组件
+  const init = () => HSStaticMethods.autoInit()
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init)
+  }
+  // 当页面加载完成时，触发初始化
+  else {
+    init()
+  }
 </script>
 
 <script is:inline src="https://hm.baidu.com/hm.js?1e554ff1c2795c01e1a3c24c8c67adc2" defer></script>
