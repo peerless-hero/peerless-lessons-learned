@@ -4,6 +4,8 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
+[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned)
+
 This is my personal technical blog, built on top of [astroverse-i18n](https://github.com/isooosi/astroverse-i18n) (the original repository has been deleted or set to private and is no longer accessible).
 
 ## Why is the project open source?
@@ -19,7 +21,7 @@ The website is deployed on Tencent Cloud [EdgeOne](https://www.tencentcloud.com/
 
 ## Website Content
 
-Part of the content of this project comes from the Internet. If it infringes your rights, please submit the issue in the code warehouse to contact me for deletion.
+Part of the content of this project comes from the Internet. If it infringes your rights, please submit the [issue](https://github.com/peerless-hero/peerless-lessons-learned/issues) in the code warehouse to contact me for deletion.
 
 Creating is not easy. If you repost original content from this website, please indicate the source and keep the original author information.
 

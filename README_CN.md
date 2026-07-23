@@ -4,6 +4,8 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
+[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://console.cloud.tencent.com/edgeone/makers/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned)
+
 本项目是我的个人技术分享网站，源码基于 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)（原仓库已被删除或设为私有，无法访问）。
 
 ## 项目为何开源？
@@ -21,7 +23,7 @@
 
 允许转载内容，但请注明出处，并保留原作者信息。
 
-此外，本项目部分内容来源于互联网，如果侵犯了您的权益，请在代码仓库提交 issue 联系本人删除。
+此外，本项目部分内容来源于互联网，如果侵犯了您的权益，请在代码仓库提交 [issue](https://github.com/peerless-hero/peerless-lessons-learned/issues) 联系本人删除。
 
 ## 关于作者
 
