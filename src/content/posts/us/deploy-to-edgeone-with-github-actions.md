@@ -6,7 +6,8 @@ category:
 tags:
   - EdgeOne
   - GitHub Actions
-  - CI/CD
+  - CI
+  - CD
   - Astro
 pubDate: 2026-07-22
 cover: /src/assets/edgeone-logo.png
