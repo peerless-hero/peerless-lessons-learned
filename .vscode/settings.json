@@ -10,5 +10,9 @@
     "astro",
     "MIIT",
     "rspack"
-  ]
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "q1nck7g935vzx2udr86mh0fpbeislo",
+    "projectKey": "q1nck7g935vzx2udr86mh0fpbeislo_peerless-lessons-learned"
+  }
 }
