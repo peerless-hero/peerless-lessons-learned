@@ -13,11 +13,15 @@ const currentLocale = post.id.startsWith('us/') ? 'en' : 'zh'
 ---
 
 <div
-  class="relative overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:scale-105 dark:bg-neutral-900 hover:-translate-y-1"
+  class="relative h-72 overflow-hidden rounded-xl bg-white transition-transform duration-500 hover:scale-105 dark:bg-neutral-900 hover:-translate-y-1"
 >
-  <a href={getRelativeLocaleUrl(currentLocale, `posts/${post.id}`)} class="block">
-    <OptimizedCover src={post.data.cover} alt={post.data.coverAlt} />
-    <div class="absolute end-0 start-0 bottom-0 p-5 bg-gradient-to-t md:p-6">
+  <a href={getRelativeLocaleUrl(currentLocale, `posts/${post.id}`)} class="absolute inset-0 block">
+    <OptimizedCover
+      src={post.data.cover}
+      alt={post.data.coverAlt}
+      class="absolute inset-0 h-full w-full object-contain"
+    />
+    <div class="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t md:p-6">
       <div class="mt-16 flex items-center gap-4 text-xs text-white">
         <span>{post.data.tags.join(' ')}</span>
         <FormattedDate date={post.data.pubDate} />
