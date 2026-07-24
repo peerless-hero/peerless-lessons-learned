@@ -4,7 +4,7 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
-[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://console.cloud.tencent.com/edgeone/makers/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned)
+[![使用 EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://console.cloud.tencent.com/edgeone/makers/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned) [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=q1nck7g935vzx2udr86mh0fpbeislo_peerless-lessons-learned)
 
 本项目是我的个人技术分享网站，源码基于 [astroverse-i18n](https://github.com/isooosi/astroverse-i18n)（原仓库已被删除或设为私有，无法访问）。
 

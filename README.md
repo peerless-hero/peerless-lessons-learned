@@ -4,7 +4,7 @@
 
 🇺🇸[English](README.md) 🇨🇳[中文](README_CN.md)
 
-[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned)
+[![Deploy with EdgeOne Pages](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fpeerless-hero%2Fpeerless-lessons-learned) [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=q1nck7g935vzx2udr86mh0fpbeislo_peerless-lessons-learned)
 
 This is my personal technical blog, built on top of [astroverse-i18n](https://github.com/isooosi/astroverse-i18n) (the original repository has been deleted or set to private and is no longer accessible).
 
@@ -15,7 +15,7 @@ This is my personal technical blog, built on top of [astroverse-i18n](https://gi
 
 ## Website address
 
-[https://peerless.vip](https://peerless.vip)
+[https://www.peerless.vip](https://www.peerless.vip)
 
 The website is deployed on Tencent Cloud [EdgeOne](https://www.tencentcloud.com/products/teo).
 
