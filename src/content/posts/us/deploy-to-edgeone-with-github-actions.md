@@ -269,15 +269,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      # 2. Install pnpm
+      # 2. Install package manager (choose as needed; comment out unused ones to avoid conflicts)
+      # ① pnpm (default)
       - name: Install pnpm
         uses: pnpm/action-setup@v6
+      # ② yarn / npm (no extra install needed, bundled with actions/setup-node)
+      # no install step
+      # ③ bun (if chosen, delete the "Install Node.js" step below)
+      # - name: Install bun
+      #   uses: oven-sh/setup-bun@v2
+      #   with:
+      #     cache: true
 
-      # 3. Install Node.js
+      # 3. Install Node.js (if using bun, delete this step)
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 26
+          # cache only supports npm / yarn / pnpm
           cache: pnpm
 
       # 4. Create EdgeOne project link file

@@ -188,14 +188,26 @@ jobs:
 
 `runs-on: ubuntu-latest` 指定整个 `deploy` 任务运行在 GitHub 托管的 Ubuntu 最新版运行器上（标准运行器约 2 vCPU / 7 GB 内存 / 14 GB SSD），后续所有 `steps` 都在该环境中顺序执行；相比 EdgeOne Makers 未公开的共享沙箱，这里可以稳定获得可预期的机器规格。`actions/checkout@v7` 用于将仓库代码检出到该运行环境中，相当于在本地执行 `git clone`。
 
-### 5.3 安装 pnpm
+### 5.3 安装包管理器
+
+本项目使用 pnpm 作为包管理器，因此需要先安装。不同的包管理器安装方式不同，可任选其一：若使用 pnpm 则启用 `pnpm/action-setup@v6`，使用 bun 则启用 `oven-sh/setup-bun@v2`，使用 yarn / npm 则无需额外安装（`actions/setup-node` 已内置）。为防止步骤冲突，同一时间只启用一个，其余注释掉：
 
 ```yaml
+# ① pnpm（默认）
 - name: 安装 pnpm
   uses: pnpm/action-setup@v6
+
+# ② yarn / npm（无需额外安装，actions/setup-node 已内置）
+# 无安装步骤
+
+# ③ bun（选择后需删除下方「安装 Node.js」步骤）
+# - name: 安装 bun
+#   uses: oven-sh/setup-bun@v2
+#   with:
+#     cache: true
 ```
 
-本项目使用 pnpm 作为包管理器，因此需要先安装 pnpm。`pnpm/action-setup@v6` 会自动识别 `package.json` 中的 `packageManager` 字段并安装对应版本。
+`pnpm/action-setup@v6` 会自动识别 `package.json` 中的 `packageManager` 字段并安装对应版本。
 
 ### 5.4 安装 Node.js
 
@@ -208,6 +220,8 @@ jobs:
 ```
 
 设置 Node.js 运行环境。这里指定了版本 26，同时启用 `cache: pnpm` 可以缓存 `pnpm store`，加速后续构建。
+
+**注意（使用 bun 时）**：`oven-sh/setup-bun` 已自带 Node.js 运行时，因此若使用 bun 作为包管理器，应**删除本整个「安装 Node.js」步骤**，无需再通过 `actions/setup-node` 安装 Node.js。同时 `actions/setup-node` 的 `cache` 字段仅支持 `npm` / `yarn` / `pnpm`，**不支持 bun**；bun 的依赖缓存改用 `oven-sh/setup-bun` 中的 `cache: true` 即可。
 
 ### 5.5 创建项目链接文件
 
@@ -269,15 +283,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      # 2. 安装 pnpm
+      # 2. 安装包管理器（按需选择，未使用的注释掉以防冲突）
+      # ① pnpm（默认）
       - name: 安装 pnpm
         uses: pnpm/action-setup@v6
+      # ② yarn / npm（无需额外安装，actions/setup-node 已内置）
+      # 无安装步骤
+      # ③ bun（选择后需删除下方「安装 Node.js」步骤）
+      # - name: 安装 bun
+      #   uses: oven-sh/setup-bun@v2
+      #   with:
+      #     cache: true
 
-      # 3. 安装 Node.js
+      # 3. 安装 Node.js（若使用 bun，删除本步骤）
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 26
+          # cache 仅支持 npm / yarn / pnpm
           cache: pnpm
 
       # 4. 创建 EdgeOne 项目链接文件
