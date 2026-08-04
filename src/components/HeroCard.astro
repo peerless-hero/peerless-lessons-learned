@@ -10,26 +10,6 @@ interface Props {
 
 const { post } = Astro.props
 const currentLocale = post.id.startsWith('us/') ? 'en' : 'zh'
-
-function truncateUTF8String(str: string, maxBytes: number) {
-  let byteCount = 0
-  let index = 0
-  while (index < str.length && byteCount < maxBytes) {
-    const char = str.charCodeAt(index)
-    if (char > 0x7ff) {
-      byteCount += 3
-    } else if (char > 0x7f) {
-      byteCount += 2
-    } else {
-      byteCount += 1
-    }
-    if (byteCount <= maxBytes) index++
-    else break
-  }
-  return str.slice(0, index) + (index < str.length ? '...' : '')
-}
-
-const truncatedDescription = truncateUTF8String(post.data.description, 150)
 ---
 
 <div
@@ -50,7 +30,7 @@ const truncatedDescription = truncateUTF8String(post.data.description, 150)
         {post.data.title}
       </h3>
       <p class="hero-desc mt-3 text-white dark:text-white md:text-neutral-900">
-        {truncatedDescription}
+        {post.data.description}
       </p>
     </div>
   </a>
@@ -70,5 +50,13 @@ const truncatedDescription = truncateUTF8String(post.data.description, 150)
     line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hero-desc {
+      display: block;
+      overflow: visible;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+    }
   }
 </style>
