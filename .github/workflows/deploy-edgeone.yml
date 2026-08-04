@@ -16,23 +16,19 @@ jobs:
         uses: actions/checkout@v7
 
       # 2. 安装 pnpm
-      - name: 安装 pnpm
-        uses: pnpm/action-setup@v6
-
-      # 3. 安装 Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - name: pnpm install
+        uses: pnpm/setup@v1
         with:
-          node-version: 26
-          cache: pnpm
+          runtime: node@26
+          cache: true
 
-      # 4. 创建 EdgeOne 项目链接文件
+      # 3. 创建 EdgeOne 项目链接文件
       - name: Create EdgeOne Project Link File
         run: |
           mkdir -p .edgeone
           echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 
-      # 5. 部署到 EdgeOne Makers
+      # 4. 部署到 EdgeOne Makers
       - name: Deploy to EdgeOne
         run: |
           npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production

@@ -22,14 +22,11 @@ jobs:
           # 关闭浅克隆以获得更准确的分析结果（新代码检测、历史趋势）
           fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+      - name: pnpm install
+        uses: pnpm/setup@v1
         with:
-          node-version: 26
-          cache: pnpm
+          runtime: node@26
+          cache: true
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
