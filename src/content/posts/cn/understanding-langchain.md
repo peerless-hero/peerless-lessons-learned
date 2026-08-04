@@ -1,6 +1,6 @@
 ---
-title: Python热门模块LangChain：大语言模型应用开发框架完全指南
-description: LangChain 是一个用于构建大语言模型（LLM）驱动应用程序的 Python 框架。它通过将 LLM 与外部数据源、工具和记忆系统连接，让开发者能够快速构建 RAG 问答、智能代理、对话机器人等 AI 应用。本文将全面介绍 LangChain 1.0 的核心概念、架构设计以及实战示例。
+title: LangChain 大语言模型应用开发框架入门指南
+description: LangChain 是一个用于构建大语言模型（LLM）驱动应用程序的 Python 框架。它通过将 LLM 与外部数据源、工具和记忆系统连接，让开发者能够快速构建 RAG 问答、智能代理、对话机器人等 AI 应用。本文将简要介绍 LangChain 的核心概念、架构设计以及一个入门实战示例。
 category:
   - 技术前沿速递
 tags:

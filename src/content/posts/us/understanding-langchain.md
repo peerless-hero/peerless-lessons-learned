@@ -1,6 +1,6 @@
 ---
-title: LangChain: A Complete Guide to the Popular Python Framework for LLM Applications
-description: LangChain is a Python framework for building Large Language Model (LLM) driven applications. By connecting LLMs with external data sources, tools, and memory systems, it enables developers to quickly build RAG question-answering, intelligent agents, chatbots, and other AI applications. This article provides a comprehensive introduction to LangChain 1.0's core concepts, architecture, and practical examples.
+title: An Introduction to LangChain the Python Framework for LLM Applications
+description: LangChain is a Python framework for building Large Language Model (LLM) driven applications. By connecting LLMs with external data sources, tools, and memory systems, it enables developers to quickly build RAG question-answering, intelligent agents, chatbots, and other AI applications. This article provides a brief introduction to LangChain's core concepts, architecture, and a beginner-friendly practical example.
 category:
   - TechFront
 tags:
