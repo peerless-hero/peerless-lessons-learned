@@ -26,7 +26,7 @@ Compared to traditional cloud server deployment, EdgeOne Makers offers:
 - **Built-in security**: DDoS protection, Web Application Firewall, and other security features out of the box
 - **Full-stack capability**: Supports static sites + edge functions (Edge Functions) hybrid architecture
 
-<Image src="/src/assets/edgeone-flow.webp" alt="EdgeOne Pages Flow" />
+![EdgeOne Pages Flow](../../../assets/edgeone-flow.webp)
 
 ## 2. Why GitHub Actions
 
@@ -109,34 +109,7 @@ In the EdgeOne Makers console, go to **Settings → API Token** and create a new
 
 This article uses an **Astro** static blog as an example. The project should include the following key files:
 
-**`edgeone.json`** (in the project root) — defines build commands, install commands, and response header configuration:
-
-```json
-{
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm build",
-  "headers": [
-    {
-      "source": "/*",
-      "headers": [
-        { "key": "cache-control", "value": "public,max-age=300,immutable" },
-        { "key": "x-content-type-options", "value": "nosniff" }
-      ]
-    },
-    {
-      "source": "/_astro/*",
-      "headers": [
-        {
-          "key": "cache-control",
-          "value": "public,max-age=31536000,immutable"
-        },
-        { "key": "x-content-type-options", "value": "nosniff" },
-        { "key": "access-control-allow-origin", "value": "*" }
-      ]
-    }
-  ]
-}
-```
+**`edgeone.json`** (in the project root) — defines build commands, install commands, and response header configuration. The complete configuration and field details are covered in **Section 7** below.
 
 ## 4. Configure GitHub Secrets
 
@@ -188,26 +161,46 @@ jobs:
 
 `runs-on: ubuntu-latest` specifies that the entire `deploy` job runs on GitHub's latest Ubuntu runner (standard runner approx 2 vCPU / 7 GB RAM / 14 GB SSD). All subsequent `steps` execute sequentially in that environment — providing predictable specs compared to EdgeOne Makers' undisclosed shared sandbox. `actions/checkout@v7` checks out your repository code into that environment, equivalent to running `git clone` locally.
 
-### 5.3 Install pnpm
+### 5.3 Install the Package Manager
 
 ```yaml
 - name: Install pnpm
   uses: pnpm/action-setup@v6
 ```
 
-This project uses pnpm as its package manager, so pnpm needs to be installed first. `pnpm/action-setup@v6` automatically detects the `packageManager` field in `package.json` and installs the corresponding version.
+This project uses pnpm as its package manager, so pnpm needs to be installed first. The install method varies by package manager: use `pnpm/action-setup@v6` for pnpm, or no extra install for yarn / npm (bundled with the `actions/setup-node` step in the next section). As for bun — since it is a Node.js-compatible runtime and package manager, it is covered together with Node.js in the "Install the Runtime" section below. To avoid step conflicts, enable only one at a time and comment out the rest. `pnpm/action-setup@v6` automatically detects the `packageManager` field in `package.json` and installs the corresponding version.
 
-### 5.4 Install Node.js
+### 5.4 Install the Runtime (Node.js / bun)
+
+This project needs a JavaScript runtime — choose either Node.js or bun. bun is a **Node.js-compatible** runtime and package manager: it can run JS / TS code directly, works with `package.json` and the npm ecosystem, and can replace "Node.js + npm/pnpm" entirely.
 
 ```yaml
+# ① Node.js (used by pnpm / yarn / npm)
 - name: Setup Node.js
   uses: actions/setup-node@v7
   with:
+    # set the Node.js version according to your project's needs
     node-version: 26
+    # cache only supports npm / yarn / pnpm
     cache: pnpm
+
+# ② bun (https://github.com/oven-sh/setup-bun)
+# - name: Setup bun
+#   uses: oven-sh/setup-bun@v2
+#   with:
+#     cache: true
 ```
 
-Sets up the Node.js runtime environment. Version 26 is specified here, and `cache: pnpm` caches the `pnpm store` to speed up subsequent builds.
+**When using Node.js**
+
+- Install the specified Node.js version via `actions/setup-node` (`26` in this example — adjust to your project's needs)
+- Enable `cache: pnpm` to cache the `pnpm store` and speed up builds; note that `cache` only supports `npm` / `yarn` / `pnpm`
+
+**When using bun**
+
+- bun is compatible with the Node.js ecosystem and can run JS / TS projects directly, so you can usually **omit the "Setup Node.js" step above**
+- Use `cache: true` in `oven-sh/setup-bun` instead for dependency caching
+- The `npx` command in the deploy step must also be changed to `bunx` (see section 5.6)
 
 ### 5.5 Create the Project Link File
 
@@ -245,6 +238,15 @@ The final step uses the EdgeOne CLI's `makers deploy` command to perform the dep
 - `-t`: passes the API Token for authentication
 - `-e production`: specifies deployment to the production environment
 
+**If using bun**: replace `npx` with `bunx`, i.e.:
+
+```yaml
+run: |
+  bunx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
+```
+
+`bunx` is bun's built-in executable-package runner, equivalent to `npx`, and can be used in its place here.
+
 The CLI automatically reads the `edgeone.json` configuration from the project root, executes `installCommand` (install dependencies) and `buildCommand` (build the project), then uploads the build artifacts to the EdgeOne edge network.
 
 ## 6. Complete Workflow File
@@ -273,21 +275,23 @@ jobs:
       # ① pnpm (default)
       - name: Install pnpm
         uses: pnpm/action-setup@v6
-      # ② yarn / npm (no extra install needed, bundled with actions/setup-node)
+      # ② yarn / npm (no extra install needed, bundled with the Setup Node.js step below)
       # no install step
-      # ③ bun (if chosen, delete the "Install Node.js" step below)
-      # - name: Install bun
-      #   uses: oven-sh/setup-bun@v2
-      #   with:
-      #     cache: true
 
-      # 3. Install Node.js (if using bun, delete this step)
+      # 3. Install runtime (Node.js / bun)
+      # ① Node.js (used by pnpm / yarn / npm)
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
+          # set the Node.js version according to your project's needs
           node-version: 26
           # cache only supports npm / yarn / pnpm
           cache: pnpm
+      # ② bun (https://github.com/oven-sh/setup-bun)
+      # - name: Setup bun
+      #   uses: oven-sh/setup-bun@v2
+      #   with:
+      #     cache: true
 
       # 4. Create EdgeOne project link file
       - name: Create EdgeOne Project Link File
@@ -295,7 +299,7 @@ jobs:
           mkdir -p .edgeone
           echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 
-      # 5. Deploy to EdgeOne
+      # 5. Deploy to EdgeOne (if using bun, replace npx below with bunx)
       - name: Deploy to EdgeOne
         run: |
           npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
@@ -425,7 +429,12 @@ This automated deployment approach is not limited to Astro projects. It works eq
 
 Links to all documents and resources mentioned in this article:
 
-- EdgeOne Makers Console: <https://console.edgeone.ai/makers>
+- EdgeOne Makers Console: https://console.edgeone.ai/makers
 - GitHub Actions: [Using secrets in GitHub Actions](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)
-- EdgeOne Makers Build Guide (Node version): <https://pages.edgeone.ai/document/build-guide>
-- EdgeOne Makers edgeone.json configuration: <https://pages.edgeone.ai/document/edgeone-json>
+- EdgeOne Makers Build Guide (Node version): https://pages.edgeone.ai/document/build-guide
+- EdgeOne Makers edgeone.json configuration: https://pages.edgeone.ai/document/edgeone-json
+- GitHub Actions used in this article:
+  - `actions/checkout`: https://github.com/actions/checkout
+  - `actions/setup-node`: https://github.com/actions/setup-node
+  - `pnpm/action-setup`: https://github.com/pnpm/action-setup
+  - `oven-sh/setup-bun`: https://github.com/oven-sh/setup-bun

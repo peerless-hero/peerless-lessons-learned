@@ -26,7 +26,7 @@ EdgeOne Makers 是**腾讯云 EdgeOne** 推出的全栈开发部署平台，前�
 - **安全防护**：内置 DDoS 防护、Web 防火墙等安全能力
 - **全栈能力**：支持纯静态网站 + 边缘函数（Edge Functions）混合架构
 
-<Image src="/src/assets/edgeone-flow.webp" alt="EdgeOne Pages Flow" />
+![EdgeOne Pages Flow](../../../assets/edgeone-flow.webp)
 
 ## 二、为什么选择 GitHub Actions
 
@@ -109,34 +109,7 @@ EdgeOne Makers 预装的 Node 版本目前都无法满足 Astro 要求的 Node�
 
 本文以 **Astro** 静态博客为例，项目中已包含以下关键文件：
 
-**`edgeone.json`**（项目根目录）- 定义项目的构建命令、安装命令和响应头配置：
-
-```json
-{
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm build",
-  "headers": [
-    {
-      "source": "/*",
-      "headers": [
-        { "key": "cache-control", "value": "public,max-age=300,immutable" },
-        { "key": "x-content-type-options", "value": "nosniff" }
-      ]
-    },
-    {
-      "source": "/_astro/*",
-      "headers": [
-        {
-          "key": "cache-control",
-          "value": "public,max-age=31536000,immutable"
-        },
-        { "key": "x-content-type-options", "value": "nosniff" },
-        { "key": "access-control-allow-origin", "value": "*" }
-      ]
-    }
-  ]
-}
-```
+**`edgeone.json`**（项目根目录）- 定义项目的构建命令、安装命令和响应头配置。完整配置与字段详解见本文**第七节**。
 
 ## 四、配置 GitHub Secrets
 
@@ -190,38 +163,50 @@ jobs:
 
 ### 5.3 安装包管理器
 
-本项目使用 pnpm 作为包管理器，因此需要先安装。不同的包管理器安装方式不同，可任选其一：若使用 pnpm 则启用 `pnpm/action-setup@v6`，使用 bun 则启用 `oven-sh/setup-bun@v2`，使用 yarn / npm 则无需额外安装（`actions/setup-node` 已内置）。为防止步骤冲突，同一时间只启用一个，其余注释掉：
+本项目使用 pnpm 作为包管理器，因此需要先安装。不同的包管理器安装方式不同：若使用 pnpm 则启用 `pnpm/action-setup@v6`，使用 yarn / npm 则无需额外安装（下节 `actions/setup-node` 已内置）。至于 bun——由于它是 Node.js 兼容的运行时与包管理器，将在下一节「安装运行时」中与 Node.js 一并说明。为防止步骤冲突，同一时间只启用一个，其余注释掉：
 
 ```yaml
 # ① pnpm（默认）
 - name: 安装 pnpm
   uses: pnpm/action-setup@v6
 
-# ② yarn / npm（无需额外安装，actions/setup-node 已内置）
+# ② yarn / npm（无需额外安装，下方 Setup Node.js 已内置）
 # 无安装步骤
+```
 
-# ③ bun（选择后需删除下方「安装 Node.js」步骤）
-# - name: 安装 bun
+`pnpm/action-setup@v6` 会自动识别 `package.json` 中的 `packageManager` 字段并安装对应版本。
+
+### 5.4 安装运行时（Node.js / bun）
+
+本项目需要 JavaScript 运行时，Node.js 与 bun 二选一。bun 是 **Node.js 兼容**的运行时与包管理器：它能直接运行 JS / TS 代码，兼容 `package.json` 与 npm 生态，可整体替代「Node.js + npm/pnpm」。
+
+```yaml
+# ① Node.js（pnpm / yarn / npm 使用）
+- name: Setup Node.js
+  uses: actions/setup-node@v7
+  with:
+    # 按项目需求设置 Node.js 版本
+    node-version: 26
+    # cache 仅支持 npm / yarn / pnpm
+    cache: pnpm
+
+# ② bun（https://github.com/oven-sh/setup-bun）
+# - name: Setup bun
 #   uses: oven-sh/setup-bun@v2
 #   with:
 #     cache: true
 ```
 
-`pnpm/action-setup@v6` 会自动识别 `package.json` 中的 `packageManager` 字段并安装对应版本。
+**选择 Node.js 时**
 
-### 5.4 安装 Node.js
+- 通过 `actions/setup-node` 安装指定版本的 Node.js（示例为 `26`，可按项目需求调整）
+- 启用 `cache: pnpm` 缓存 `pnpm store` 以加速构建；注意 `cache` 字段仅支持 `npm` / `yarn` / `pnpm`
 
-```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v7
-  with:
-    node-version: 26
-    cache: pnpm
-```
+**选择 bun 时**
 
-设置 Node.js 运行环境。这里指定了版本 26，同时启用 `cache: pnpm` 可以缓存 `pnpm store`，加速后续构建。
-
-**注意（使用 bun 时）**：`oven-sh/setup-bun` 已自带 Node.js 运行时，因此若使用 bun 作为包管理器，应**删除本整个「安装 Node.js」步骤**，无需再通过 `actions/setup-node` 安装 Node.js。同时 `actions/setup-node` 的 `cache` 字段仅支持 `npm` / `yarn` / `pnpm`，**不支持 bun**；bun 的依赖缓存改用 `oven-sh/setup-bun` 中的 `cache: true` 即可。
+- bun 兼容 Node.js 生态，可直接运行 JS / TS 项目，通常可省略上方「Setup Node.js」步骤
+- 依赖缓存改用 `oven-sh/setup-bun` 中的 `cache: true`
+- 后续部署步骤中的 `npx` 命令需一并改为 `bunx`（详见 5.6 节）
 
 ### 5.5 创建项目链接文件
 
@@ -259,6 +244,15 @@ jobs:
 - `-t`：传入 API Token 进行身份认证
 - `-e production`：指定部署到生产环境
 
+**若使用 bun 环境**：`npx` 需替换为 `bunx`，即：
+
+```yaml
+run: |
+  bunx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
+```
+
+`bunx` 是 bun 自带的、与 `npx` 等价的可执行包运行工具，可在此替代 `npx`。
+
 CLI 会自动读取项目根目录的 `edgeone.json` 配置，执行 `installCommand`（安装依赖）和 `buildCommand`（构建项目），然后将构建产物上传至 EdgeOne 边缘网络。
 
 ## 六、完整工作流文件
@@ -287,21 +281,23 @@ jobs:
       # ① pnpm（默认）
       - name: 安装 pnpm
         uses: pnpm/action-setup@v6
-      # ② yarn / npm（无需额外安装，actions/setup-node 已内置）
+      # ② yarn / npm（无需额外安装，下方 Setup Node.js 已内置）
       # 无安装步骤
-      # ③ bun（选择后需删除下方「安装 Node.js」步骤）
-      # - name: 安装 bun
-      #   uses: oven-sh/setup-bun@v2
-      #   with:
-      #     cache: true
 
-      # 3. 安装 Node.js（若使用 bun，删除本步骤）
+      # 3. 安装运行时（Node.js / bun）
+      # ① Node.js（pnpm / yarn / npm 使用）
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
+          # 按项目需求设置 Node.js 版本
           node-version: 26
           # cache 仅支持 npm / yarn / pnpm
           cache: pnpm
+      # ② bun（https://github.com/oven-sh/setup-bun）
+      # - name: Setup bun
+      #   uses: oven-sh/setup-bun@v2
+      #   with:
+      #     cache: true
 
       # 4. 创建 EdgeOne 项目链接文件
       - name: Create EdgeOne Project Link File
@@ -309,7 +305,7 @@ jobs:
           mkdir -p .edgeone
           echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 
-      # 5. 部署到 EdgeOne
+      # 5. 部署到 EdgeOne（若使用 bun，将下方 npx 替换为 bunx）
       - name: Deploy to EdgeOne
         run: |
           npx edgeone makers deploy -t ${{ secrets.EDGEONE_API_TOKEN }} -e production
@@ -439,7 +435,12 @@ on:
 
 本文涉及的文档与资源链接汇总如下：
 
-- EdgeOne Makers 控制台：<https://console.edgeone.ai/makers>
-- GitHub Actions《在 GitHub Actions 中使用机密》：<https://docs.github.com/zh/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets>
-- EdgeOne Makers《构建指南（Node 版本）》：<https://pages.edgeone.ai/zh/document/build-guide>
-- EdgeOne Makers《edgeone.json 配置详解》：<https://pages.edgeone.ai/zh/document/edgeone-json>
+- EdgeOne Makers 控制台：https://console.edgeone.ai/makers
+- GitHub Actions《在 GitHub Actions 中使用机密》：https://docs.github.com/zh/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
+- EdgeOne Makers《构建指南（Node 版本）》：https://pages.edgeone.ai/zh/document/build-guide
+- EdgeOne Makers《edgeone.json 配置详解》：https://pages.edgeone.ai/zh/document/edgeone-json
+- 本文使用的 GitHub Actions：
+  - `actions/checkout`：https://github.com/actions/checkout
+  - `actions/setup-node`：https://github.com/actions/setup-node
+  - `pnpm/action-setup`：https://github.com/pnpm/action-setup
+  - `oven-sh/setup-bun`：https://github.com/oven-sh/setup-bun
