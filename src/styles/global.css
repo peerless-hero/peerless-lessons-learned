@@ -1,0 +1,63 @@
+/*
+ * 全局样式：解决移动端横向溢出（页面无法完整展示、出现横向滚动条）问题。
+ *
+ * 主要溢出源：
+ *  1. 长且不可断行的内联代码 / 长 URL（如 docker 卸载命令、镜像源地址等）
+ *  2. 超宽 markdown 表格
+ *  3. 超宽代码块
+ *  4. 根容器本身可能被内容撑开
+ */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* 让长单词 / URL / 内联代码可在行内断行，避免撑破容器 */
+.prose {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.prose code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.prose a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 代码块在容器内横向滚动，而非撑开页面 */
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* 表格在容器内横向滚动，而非撑开页面 */
+.prose table {
+  display: block;
+  max-width: 100%;
+  width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* 长行（如长 URL 引用）允许换行 */
+.prose p,
+.prose li,
+.prose td,
+.prose th {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* 图片等媒体自适应容器宽度 */
+.prose img,
+.prose picture,
+.prose video,
+.prose iframe {
+  max-width: 100%;
+  height: auto;
+}
