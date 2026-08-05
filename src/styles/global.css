@@ -20,12 +20,10 @@ body {
 
 .prose code {
   overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .prose a {
   overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 /* 代码块在容器内横向滚动，而非撑开页面 */
