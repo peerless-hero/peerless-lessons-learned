@@ -61,13 +61,13 @@ EdgeOne Makers itself supports building and deploying directly on the platform, 
 
 The following table compares the build capabilities of both:
 
-| Item                                         | EdgeOne Makers Default Build Environment                                                                                  | GitHub Actions Runner                                                          |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| **Node Version**                             | Only 7 pre-set versions (14.21.3, 16.20.2, 18.20.4, 20.18.0, 22.11.0, 22.17.1, 24.5.0); other versions cannot be selected | Any version (18 / 20 / 22 / 26…), freely specified via `setup-node`            |
-| **Build Machine Specs**                      | Platform-fixed shared sandbox, specs undisclosed and not adjustable                                                       | Standard runner approx 2 vCPU / 7 GB RAM / 14 GB SSD; larger runners available |
-| **Package Manager / Toolchain**              | Limited by pre-installed environment (`.nvmrc` custom versions lack package managers)                                     | Freely install any toolchain (pnpm, yarn, bun, etc.)                           |
-| **Build Cache**                              | Platform-managed, limited flexibility                                                                                     | Can cache pnpm/npm store and build artifacts for significant speedup           |
-| **Private Dependencies / Secrets Injection** | Depends on platform environment variable configuration                                                                    | Flexible via Secrets, caching, service containers                              |
+| Item                                         | EdgeOne Makers Default Build Environment                                              | GitHub Actions Runner                                                          |
+| -------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Node Version**                             | Only fixed pre-set versions, no free selection                                        | Any version, freely specified via `setup-node`                                 |
+| **Build Machine Specs**                      | Platform-fixed shared sandbox, specs undisclosed and not adjustable                   | Standard runner approx 2 vCPU / 7 GB RAM / 14 GB SSD; larger runners available |
+| **Package Manager / Toolchain**              | Limited by pre-installed environment (`.nvmrc` custom versions lack package managers) | Freely install any toolchain (pnpm, yarn, bun, etc.)                           |
+| **Build Cache**                              | Platform-managed, limited flexibility                                                 | Can cache pnpm/npm store and build artifacts for significant speedup           |
+| **Private Dependencies / Secrets Injection** | Depends on platform environment variable configuration                                | Flexible via Secrets, caching, service containers                              |
 
 None of the Node versions pre-installed by EdgeOne Makers meet Astro's requirements, so building must be done in GitHub Actions, and only the upload step is handled by the EdgeOne CLI.
 
@@ -211,7 +211,7 @@ This project needs a JavaScript runtime — choose either Node.js or bun. bun is
     echo '{"Name":"${{ secrets.EDGEONE_NAME }}","ProjectId":"${{ secrets.EDGEONE_PROJECT_ID }}"}' > .edgeone/project.json
 ```
 
-This step may look like just writing a JSON file, but it is the key to the entire workflow. The reason is that **EdgeOne CLI must "link a project" before deploying**, and there are two important things to note:
+This JSON file tells the **EdgeOne CLI which project to link before deploying**, and it is the key to the entire workflow. Two things to note:
 
 1. **Not linking a project ID triggers "auto-create project", which fails due to name conflicts**
 
