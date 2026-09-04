@@ -2,7 +2,7 @@
   "name": "peerless-lessons-learned",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -45,7 +45,7 @@
     "unocss": "^66.7.5"
   },
   "volta": {
-    "node": "26.7.0",
-    "pnpm": "11.22.0"
+    "node": "26.8.1",
+    "pnpm": "11.25.0"
   }
 }
