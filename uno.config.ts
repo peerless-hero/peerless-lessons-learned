@@ -15,29 +15,41 @@ import {
  * 创建 Preline 状态变体。将 hs-xxx:utility 转换为对应 CSS 选择器规则，
  * 替代手写 preflights。变体与 dark:/hover: 等内置变体自然链式组合。
  *
- * @param prefix  - 变体前缀，如 'hs-dropdown-open:'
- * @param selectors - 选择器模板数组，{cls} 会被替换为实际 class 名
+ * 注意：UnoCSS 变体通过 selector 函数接收当前(含变体前缀的)类选择器 s，
+ * 直接在其前面拼祖先选择器即可，不能再使用旧的 "{cls}" 字符串模板，
+ * 否则会生成重复前缀（如 hs-dark-mode-active:hs-dark-mode-active:hidden）。
+ *
+ * @param prefix    - 变体前缀，如 'hs-dropdown-open:'
+ * @param ancestors - 祖先选择器前缀数组。以空格 / > 结尾表示命中其后代元素，
+ *                    否则表示实用类所在元素本身同时满足该祖先条件。每个祖先
+ *                    独立生成一条规则，保证与 dark:/hover: 等链式变体组合时
+ *                    前缀（守卫）能正确作用于每一条。
  *
  * @example prelineState('hs-dropdown-open:', [
- *   '.hs-dropdown.open > .hs-dropdown-open\\:{cls}',
- *   '.hs-dropdown.open > .hs-dropdown-toggle .hs-dropdown-open\\:{cls}',
+ *   '.hs-dropdown.open > ',                          // 直接子元素
+ *   '.hs-dropdown.open > .hs-dropdown-toggle ',      // 后代元素
+ *   '.hs-dropdown.open > .hs-dropdown-menu > ',      // 直接子元素
+ *   '.hs-dropdown-menu.open',                        // 元素自身
  * ])
  * // safelist 中有 'hs-dropdown-open:opacity-100' 时自动生成:
- * // .hs-dropdown.open > .hs-dropdown-open\:opacity-100 { opacity: 1 }
- * // .hs-dropdown.open > .hs-dropdown-toggle .hs-dropdown-open\:opacity-100 { opacity: 1 }
+ * // .hs-dropdown.open > .hs-dropdown-open\:opacity-100,
+ * // .hs-dropdown.open > .hs-dropdown-toggle .hs-dropdown-open\:opacity-100,
+ * // .hs-dropdown.open > .hs-dropdown-menu > .hs-dropdown-open\:opacity-100,
+ * // .hs-dropdown-menu.open.hs-dropdown-open\:opacity-100 { opacity: 1 }
  */
-function prelineState(prefix: string, selectors: string[]) {
+function prelineState(prefix: string, ancestors: string[]) {
   return {
     match(matcher: string) {
       if (!matcher.startsWith(prefix))
         return
-      return {
-        matcher: matcher.slice(prefix.length),
+      const rest = matcher.slice(prefix.length)
+      const handlers = ancestors.map(ancestor => ({
+        matcher: rest,
         selector(s: string) {
-          const cls = s.slice(1)
-          return selectors.map(sel => sel.replace('{cls}', cls)).join(',')
+          return `${ancestor}${s}`
         },
-      }
+      }))
+      return handlers.length === 1 ? handlers[0] : handlers
     },
   }
 }
@@ -101,31 +113,31 @@ export default defineConfig<PresetWind3Theme & TypographyTheme>({
   // 替代手写 preflights。变体与 dark:/hover: 等内置变体自然链式组合。
   variants: [
     prelineState('hs-dropdown-open:', [
-      String.raw`.hs-dropdown.open > .hs-dropdown-open\:{cls}`,
-      String.raw`.hs-dropdown.open > .hs-dropdown-toggle .hs-dropdown-open\:{cls}`,
-      String.raw`.hs-dropdown.open > .hs-dropdown-menu > .hs-dropdown-open\:{cls}`,
-      String.raw`.hs-dropdown-menu.open.hs-dropdown-open\:{cls}`,
+      '.hs-dropdown.open > ',
+      '.hs-dropdown.open > .hs-dropdown-toggle ',
+      '.hs-dropdown.open > .hs-dropdown-menu > ',
+      '.hs-dropdown-menu.open',
     ]),
     prelineState('hs-collapse-open:', [
-      String.raw`.hs-collapse.open .hs-collapse-open\:{cls}`,
-      String.raw`.hs-collapse.open.hs-collapse-open\:{cls}`,
-      String.raw`.hs-collapse-toggle.open .hs-collapse-open\:{cls}`,
-      String.raw`.hs-collapse-toggle.open.hs-collapse-open\:{cls}`,
+      '.hs-collapse.open ',
+      '.hs-collapse.open',
+      '.hs-collapse-toggle.open ',
+      '.hs-collapse-toggle.open',
     ]),
     prelineState('hs-tab-active:', [
-      String.raw`[data-hs-tab].active.hs-tab-active\:{cls}`,
-      String.raw`[data-hs-tab].active .hs-tab-active\:{cls}`,
+      '[data-hs-tab].active',
+      '[data-hs-tab].active ',
     ]),
     prelineState('hs-dark-mode-active:', [
-      String.raw`.dark .hs-dark-mode-active\:{cls}`,
+      '.dark ',
     ]),
     prelineState('hs-combo-box-selected:', [
-      String.raw`.selected.hs-combo-box-selected\:{cls}`,
-      String.raw`.selected .hs-combo-box-selected\:{cls}`,
+      '.selected',
+      '.selected ',
     ]),
     prelineState('hs-file-upload-complete:', [
-      String.raw`.complete.hs-file-upload-complete\:{cls}`,
-      String.raw`.complete .hs-file-upload-complete\:{cls}`,
+      '.complete',
+      '.complete ',
     ]),
   ],
   preflights: [
