@@ -33,6 +33,29 @@ const enUrl = getAlternateLocaleUrl('en')
 ---
 
 <meta charset="utf-8" />
+<!--
+  主题初始化（防止首屏闪烁）：
+  默认（localStorage 无 hs_theme 记录）跟随系统 prefers-color-scheme，
+  并写入 hs_theme=auto 以启用 Preline 对系统主题变更的实时监听；
+  若用户曾手动切换过（hs_theme=light/dark），则尊重该选择。
+-->
+<script is:inline>
+  ;(() => {
+    const root = document.documentElement
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    let stored = null
+    stored = localStorage.getItem('hs_theme')
+    if (stored === null) {
+      localStorage.setItem('hs_theme', 'auto')
+      stored = 'auto'
+    }
+    const dark = stored === 'dark' || (stored === 'auto' && mq.matches)
+    root.classList.remove('light', 'dark', 'default', 'auto')
+    if (dark) {
+      root.classList.add('dark')
+    }
+  })()
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
