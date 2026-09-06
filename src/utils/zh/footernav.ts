@@ -21,4 +21,5 @@ export const three = [
 
 export const more = [
   { text: '关于', href: '/about/' },
+  { text: '开源贡献', href: '/opensource/' },
 ]

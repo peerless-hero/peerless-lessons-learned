@@ -21,4 +21,5 @@ export const three = [
 
 export const more = [
   { text: 'About', href: '/about/' },
+  { text: 'Open Source', href: '/opensource/' },
 ]

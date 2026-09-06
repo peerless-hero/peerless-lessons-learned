@@ -1,0 +1,61 @@
+---
+import OpenSourceContributionCard from '@components/OpenSourceContributionCard.astro'
+import { Icon } from 'astro-icon/components'
+import { getConstants } from '@consts'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { contributions, openSourceMeta, overviewStats } from '@utils/zh/opensource'
+
+const currentLocale = 'zh'
+const constants = getConstants(currentLocale)
+
+const title = `开源贡献 - ${constants.SITE_TITLE}`
+const description =
+  '无双（peerless-hero）在 GitHub 开源社区的开源贡献清单：累计 29 个已合并 PR，覆盖 11 个外部公开仓库，重点呈现 7 条高影响力贡献。'
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <!-- 页头 -->
+    <section class="text-center">
+      <p class="text-sm font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">
+        Open Source Contributions
+      </p>
+      <h1 class="mt-2 text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-white">开源贡献</h1>
+      <p class="mx-auto mt-4 max-w-3xl leading-relaxed text-neutral-600 dark:text-neutral-300">
+        向 LobeHub、CubeSandbox、unplugin-auto-import、showdoc 等开源项目持续提交代码， 累计 <strong
+          class="font-semibold text-neutral-900 dark:text-neutral-100">29</strong
+        > 个 PR 通过外部评审并合并， 覆盖 TypeScript、Go、PHP、Java 等技术栈。
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
+        <a
+          href={openSourceMeta.accountUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-neutral-300 bg-white px-4 py-2 font-medium text-neutral-700 transition-colors hover:border-sky-400 hover:text-sky-600 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-sky-500 dark:hover:text-sky-400"
+        >
+          <Icon name="tabler:brand-github" class="inline-block size-4 shrink-0 align-bottom" />
+          github.com/{openSourceMeta.account}
+        </a>
+        <span
+          class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-100 px-4 py-2 font-medium text-neutral-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400"
+        >
+          <Icon name="tabler:calendar" class="inline-block size-4 shrink-0 align-bottom" />
+          数据快照 {openSourceMeta.collectedAt}
+        </span>
+      </div>
+    </section>
+
+    <!-- 贡献列表 -->
+    <section class="mt-14">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">贡献列表</h2>
+          <p class="mt-2 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+            共 {contributions.length} 条，按合并时间倒序排列
+          </p>
+        </div>
+      </div>
+      <OpenSourceContributionCard contributions={contributions} />
+    </section>
+  </main>
+</BaseLayout>
