@@ -3,16 +3,68 @@ import OpenSourceContributionCard from '@components/OpenSourceContributionCard.a
 import { Icon } from 'astro-icon/components'
 import { getConstants } from '@consts'
 import BaseLayout from '@layouts/BaseLayout.astro'
-import { contributions, openSourceMeta, overviewStats } from '@utils/zh/opensource'
+import { contributions, openSourceMeta } from '@utils/zh/opensource'
 
 const currentLocale = 'zh'
 const constants = getConstants(currentLocale)
 
 const title = `开源贡献 - ${constants.SITE_TITLE}`
-const description = '无双（peerless-hero）在 GitHub 开源社区的高影响力开源贡献清单。'
+const description =
+  '无双（peerless-hero）的开源贡献页：向 LobeHub、CubeSandbox、unplugin-auto-import、showdoc 等 GitHub 外部公开项目提交 PR 并被合并，附数据快照与按时间倒序的贡献清单。'
+
+// 结构化数据（SEO）：面包屑导航 + 贡献者 + 贡献仓库列表
+const pageUrl = new URL(Astro.url.pathname, Astro.site)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: '首页',
+          item: new URL('/', Astro.site).toString(),
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: '开源贡献',
+          item: pageUrl.toString(),
+        },
+      ],
+    },
+    {
+      '@type': 'ProfilePage',
+      mainEntity: {
+        '@type': 'Person',
+        name: '无双（peerless-hero）',
+        alternateName: 'peerless-hero',
+        url: openSourceMeta.accountUrl,
+        sameAs: [openSourceMeta.accountUrl],
+        description: '无双（peerless-hero）的开源贡献者主页',
+      },
+      name: '开源贡献',
+      url: pageUrl.toString(),
+      description,
+    },
+    {
+      '@type': 'ItemList',
+      name: '开源贡献清单',
+      description: '无双（peerless-hero）已合并的外部仓库 Pull Request 贡献。',
+      itemListElement: contributions.map((c, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: c.repoUrl,
+        name: c.repo,
+      })),
+    },
+  ],
+}
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image="/screenshot.webp">
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <main class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
     <!-- 页头 -->
     <section class="text-center">

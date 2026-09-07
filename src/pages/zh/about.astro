@@ -5,9 +5,9 @@ import { getConstants } from '@consts'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
 
-import codingDeveloper from 'src/assets/coding-developer.jpg'
-import techCode from 'src/assets/tech-code.jpg'
-import hikingAdventure from 'src/assets/hiking-adventure.jpg'
+import codingDeveloper from '@assets/coding-developer.jpg'
+import techCode from '@assets/tech-code.jpg'
+import hikingAdventure from '@assets/hiking-adventure.jpg'
 
 const currentLocale = 'zh'
 const constants = getConstants(currentLocale)
@@ -39,7 +39,7 @@ const tabs = [
 ]
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={codingDeveloper.src}>
   <div class="mx-auto max-w-[85rem] px-4 py-10 lg:px-8 lg:py-14 sm:px-6">
     <div class="relative p-6 md:p-16">
       <div class="relative z-10 lg:grid lg:grid-cols-12 lg:items-center lg:gap-16">

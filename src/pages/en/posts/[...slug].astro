@@ -25,9 +25,32 @@ const { Content } = await render(post)
 
 const currentLocale = 'en'
 const constants = getConstants(currentLocale)
+
+const title = `${post.data.title} - ${constants.SITE_TITLE}`
+const description = post.data.description
+
+const postUrl = new URL(Astro.url.pathname, Astro.site).toString()
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description,
+  url: postUrl,
+  datePublished: new Date(post.data.pubDate).toISOString(),
+  inLanguage: 'en-US',
+  author: {
+    '@type': 'Person',
+    name: post.data.author,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': postUrl,
+  },
+}
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={title} description={description} ogType="article">
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <main>
     <article class="mx-auto prose dark:prose-invert">
       <div class="prose-h1 text-center">

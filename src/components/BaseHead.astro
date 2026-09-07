@@ -1,15 +1,22 @@
 ---
+import { getConstants } from '@consts'
+
 interface Props {
   title: string
   description: string
   image?: string
+  ogType?: 'website' | 'article'
+  noindex?: boolean
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { title, description, image = '/blog-placeholder-1.avif' } = Astro.props
+const { title, description, image = '/screenshot.webp', ogType = 'website', noindex = false } = Astro.props
 
 const currentLocale = Astro.currentLocale ?? 'zh'
+
+const ogLocale = currentLocale === 'zh' ? 'zh_CN' : 'en_US'
+const constants = getConstants(currentLocale as 'zh' | 'en')
 
 function getAlternateLocaleUrl(targetLocale: string) {
   const pathParts = Astro.url.pathname.split('/').filter(Boolean)
@@ -33,12 +40,8 @@ const enUrl = getAlternateLocaleUrl('en')
 ---
 
 <meta charset="utf-8" />
-<!--
-  主题初始化（防止首屏闪烁）：
-  默认（localStorage 无 hs_theme 记录）跟随系统 prefers-color-scheme，
-  并写入 hs_theme=auto 以启用 Preline 对系统主题变更的实时监听；
-  若用户曾手动切换过（hs_theme=light/dark），则尊重该选择。
--->
+<!-- Theme init to prevent FOUC. -->
+<!-- Defaults to prefers-color-scheme and stores hs_theme=auto for Preline live theme sync; a manual light/dark choice is respected when present. -->
 <script is:inline>
   ;(() => {
     const root = document.documentElement
@@ -75,8 +78,11 @@ const enUrl = getAlternateLocaleUrl('en')
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="baidu-site-verification" content="codeva-PfQse1ly3W" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:site_name" content={constants.SITE_TITLE} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -90,14 +96,14 @@ const enUrl = getAlternateLocaleUrl('en')
 <script>
   import { HSStaticMethods } from 'preline'
 
-  // Preline v2 各组件通过 window.load 事件自动初始化，
-  // 但当 script 为 type=module 时，执行时机晚于 load 事件，
-  // 因此需要在 DOM 就绪后显式调用 autoInit() 激活所有 hs-* 组件
+  // Preline v2 components initialize on window.load.
+  // As type=module scripts run after load, call autoInit()
+  // once the DOM is ready to activate all hs-* components.
   const init = () => HSStaticMethods.autoInit()
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init)
   }
-  // 当页面加载完成时，触发初始化
+  // Init again once the page has fully loaded.
   else {
     init()
   }
