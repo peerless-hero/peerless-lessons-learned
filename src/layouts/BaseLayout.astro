@@ -4,14 +4,15 @@ import Footer from '@components/Footer.astro'
 import Header from '@components/Header.astro'
 import '@styles/global.css'
 
-const { title, description } = Astro.props
+const { title, description, image } = Astro.props
 const lang = Astro.currentLocale ?? 'zh'
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
   </head>
   <body class="mx-auto max-w-6xl min-h-screen flex flex-col px-4 dark:bg-neutral-900 lg:px-8 sm:px-6 dark:prose-invert">
     <Header />
