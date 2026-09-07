@@ -66,7 +66,6 @@ const jsonLd = {
 <BaseLayout title={title} description={description} image="/screenshot.webp">
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   <main class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <!-- Hero -->
     <section class="text-center">
       <p class="text-sm font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">
         Open Source Contributions
@@ -92,7 +91,7 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Overview -->
+    {/* Overview */}
     <section class="mt-12">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
@@ -109,7 +108,7 @@ const jsonLd = {
       </p>
     </section>
 
-    <!-- Contribution list -->
+    {/* Contribution list */}
     <section class="mt-14">
       <div class="flex flex-wrap items-end justify-between gap-3">
         <div>

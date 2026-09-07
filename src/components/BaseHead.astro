@@ -40,8 +40,9 @@ const enUrl = getAlternateLocaleUrl('en')
 ---
 
 <meta charset="utf-8" />
-<!-- Theme init to prevent FOUC. -->
-<!-- Defaults to prefers-color-scheme and stores hs_theme=auto for Preline live theme sync; a manual light/dark choice is respected when present. -->
+{
+  /* 主题初始化（防止首屏闪烁）：默认跟随系统 prefers-color-scheme 并写入 hs_theme=auto 以启用 Preline 的实时监听；若用户手动切换过（hs_theme=light/dark），则尊重该选择。 */
+}
 <script is:inline>
   ;(() => {
     const root = document.documentElement
