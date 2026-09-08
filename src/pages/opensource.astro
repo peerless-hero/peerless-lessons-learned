@@ -1,0 +1,39 @@
+---
+import BaseHead from '@components/BaseHead.astro'
+import { getConstants } from '@consts'
+
+// 此页为「无语言前缀」的本地化分发入口：
+// 通过 is:inline 脚本按浏览器语言跳转到 /zh/opensource/ 或 /en/opensource/，
+// 因此不会真实渲染正文内容；同时对搜索引擎标记 noindex，避免重复内容。
+// 注意：is:inline 脚本内容会原样输出到 HTML，故解释性注释一律放在本 frontmatter 中。
+const currentLocale = 'zh'
+const constants = getConstants(currentLocale)
+const title = `开源贡献 / Open Source - ${constants.SITE_TITLE}`
+const description = '无双（peerless-hero）的开源贡献清单。'
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={title} description={description} noindex />
+    <script is:inline>
+      ;(() => {
+        const languages = navigator.languages?.length ? navigator.languages : [navigator.language ?? 'zh']
+        const preferChinese = languages.some((lang) => lang.toLowerCase().includes('zh'))
+        const target = preferChinese ? '/zh/opensource/' : '/en/opensource/'
+        location.replace(target)
+      })()
+    </script>
+  </head>
+  <body class="flex min-h-screen items-center justify-center bg-neutral-50 px-6 dark:bg-neutral-900">
+    <noscript>
+      <main class="text-center">
+        <p class="text-neutral-600 dark:text-neutral-400">请选择语言 / Choose your language</p>
+        <p class="mt-4">
+          <a class="mx-2 text-sky-600 underline dark:text-sky-400" href="/zh/opensource/">中文</a>
+          <a class="mx-2 text-sky-600 underline dark:text-sky-400" href="/en/opensource/">English</a>
+        </p>
+      </main>
+    </noscript>
+  </body>
+</html>
