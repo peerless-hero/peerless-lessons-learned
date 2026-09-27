@@ -1,8 +1,21 @@
 {
   "name": "peerless-lessons-learned",
   "type": "module",
-  "version": "0.0.1",
-  "packageManager": "pnpm@11.25.0",
+  "version": "0.0.2",
+  "packageManager": "pnpm@11.28.0",
+  "author": "peerless-hero <peerless-hero@outlook.com> (https://github.com/peerless-hero/)",
+  "license": "MIT",
+  "homepage": "https://www.peerless.vip",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peerless-hero/peerless-lessons-learned.git"
+  },
+  "bugs": {
+    "url": "https://github.com/peerless-hero/peerless-lessons-learned/issues"
+  },
+  "keywords": [
+    "peerless-lessons-learned"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -46,6 +59,6 @@
   },
   "volta": {
     "node": "26.8.1",
-    "pnpm": "11.25.0"
+    "pnpm": "11.28.0"
   }
 }
