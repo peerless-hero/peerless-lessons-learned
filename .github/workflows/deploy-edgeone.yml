@@ -19,7 +19,6 @@ jobs:
       - name: pnpm install
         uses: pnpm/setup@v3
         with:
-          runtime: node@26
           # 关闭自动安装，避免与步骤4重复
           run_install: false
           cache: true

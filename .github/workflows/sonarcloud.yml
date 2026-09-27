@@ -25,7 +25,6 @@ jobs:
       - name: pnpm install
         uses: pnpm/setup@v3
         with:
-          runtime: node@26
           run_install: true
           cache: true
 
