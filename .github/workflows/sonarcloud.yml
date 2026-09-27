@@ -25,7 +25,7 @@ jobs:
       - name: pnpm install
         uses: pnpm/setup@v3
         with:
-          run_install: true
+          install: true
           cache: true
 
       - name: SonarCloud Scan

@@ -20,7 +20,7 @@ jobs:
         uses: pnpm/setup@v3
         with:
           # 关闭自动安装，避免与步骤4重复
-          run_install: false
+          install: false
           cache: true
 
       # 3. 创建 EdgeOne 项目链接文件
