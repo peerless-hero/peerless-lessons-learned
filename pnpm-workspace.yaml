@@ -1,7 +1,11 @@
-allowBuilds:
-  esbuild: true
-  sharp: true
-shellEmulator: true
+minimumReleaseAgeExcludePrune: true
+
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - chokidar@4.0.3
+
+shellEmulator: true
+
+allowBuilds:
+  esbuild: true
+  sharp: true
