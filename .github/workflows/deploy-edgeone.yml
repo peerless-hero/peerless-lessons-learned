@@ -17,9 +17,11 @@ jobs:
 
       # 2. 安装 pnpm
       - name: pnpm install
-        uses: pnpm/setup@v1
+        uses: pnpm/setup@v3
         with:
           runtime: node@26
+          # 关闭自动安装，避免与步骤4重复
+          run_install: false
           cache: true
 
       # 3. 创建 EdgeOne 项目链接文件

@@ -23,13 +23,11 @@ jobs:
           fetch-depth: 0
 
       - name: pnpm install
-        uses: pnpm/setup@v1
+        uses: pnpm/setup@v3
         with:
           runtime: node@26
+          run_install: true
           cache: true
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v8
